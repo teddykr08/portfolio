@@ -1,4 +1,6 @@
 import type { BuiltProject } from "@/content/site";
+import { Artifacts } from "./Artifacts";
+import { BuildLog } from "./BuildLog";
 import { MediaSlot } from "./MediaSlot";
 import { StatusBadge } from "./StatusBadge";
 import { Inline, Prose } from "./Text";
@@ -20,6 +22,7 @@ function hostname(url: string) {
 
 export function BuiltCard({ project }: { project: BuiltProject }) {
   const headingId = `${project.slug}-title`;
+  const numbers = project.numbers.filter((n) => n.value.trim());
   return (
     <article
       id={project.slug}
@@ -56,6 +59,24 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
             </div>
           </dl>
 
+          {numbers.length > 0 && (
+            <dl className="mt-1 flex flex-wrap gap-2" aria-label={`${project.name} numbers`}>
+              {numbers.map((n, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col-reverse rounded-lg border border-border px-2.5 py-1 leading-tight"
+                >
+                  <dt className="text-xs text-muted">
+                    <Inline text={n.label} />
+                  </dt>
+                  <dd className="font-display text-lg font-bold tabular-nums">
+                    <Inline text={n.value} />
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          )}
+
           {(project.liveUrl || project.repoUrl) && (
             <div className="mt-1 flex flex-wrap gap-2 text-sm font-medium">
               {project.liveUrl && (
@@ -85,6 +106,13 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
         </div>
       </div>
 
+      {project.carriedForward.trim() && (
+        <div className="mt-4 border-l-2 border-accent pl-3">
+          <h4 className="text-xs font-bold tracking-[0.08em] text-muted uppercase">Carried forward</h4>
+          <Prose text={project.carriedForward} className="mt-1" />
+        </div>
+      )}
+
       <details className="group mt-4 border-t border-border pt-3">
         <summary className="flex cursor-pointer items-center gap-2 rounded text-sm font-semibold text-accent select-none">
           <span
@@ -105,6 +133,8 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
             </section>
           ))}
         </div>
+        <Artifacts slug={project.slug} listed={project.artifacts} id={`${project.slug}-artifacts`} />
+        {project.buildLog && <BuildLog entries={project.buildLog} id={`${project.slug}-log`} />}
       </details>
     </article>
   );

@@ -15,6 +15,10 @@
  * (.mp4 .webm) in public/projects/<slug>/. It's picked up automatically.
  * If the folder has several files, set `media` on the project to the filename
  * you want. No file = a neutral placeholder box.
+ *
+ * Artifacts (screenshots, PDFs of real work): drop them in
+ * public/projects/<slug>/artifacts/. They show up automatically in the
+ * expanded card; list them in `artifacts` to give them labels.
  */
 
 // ---------------------------------------------------------------------------
@@ -43,6 +47,43 @@ export type BuiltProject = {
     whatHappened: string;
     whatILearned: string;
   };
+  /** Shown on the collapsed card, right under the one-liner. */
+  carriedForward: string;
+  /** Real figures only. Empty list = the Numbers row isn't shown. Entries with an empty value are skipped. */
+  numbers: ProjectNumber[];
+  /**
+   * Proof of real work, shown in the expanded card. Files in
+   * public/projects/<slug>/artifacts/ appear automatically (filename as the
+   * label). List them here to add a label, alt text, or order, or to add a
+   * link to something hosted elsewhere.
+   */
+  artifacts?: Artifact[];
+  /** Dated log. Sorted newest first automatically; 5 shown, the rest behind "Show all". */
+  buildLog?: LogEntry[];
+};
+
+export type ProjectNumber = {
+  /** The figure itself, e.g. "120". */
+  value: string;
+  /** What it counts, e.g. "signups". */
+  label: string;
+};
+
+export type Artifact = {
+  /** Short label shown under the thumbnail. */
+  label: string;
+  /** A file in public/projects/<slug>/artifacts/, e.g. "reddit-post.png". */
+  file?: string;
+  /** Or a link to something hosted elsewhere. */
+  href?: string;
+  /** For images: describe what's in it (screen readers). Defaults to the label. */
+  alt?: string;
+};
+
+export type LogEntry = {
+  /** "YYYY-MM-DD", e.g. "2026-09-26". Used for sorting and shown as "Sep 26, 2026". */
+  date: string;
+  entry: string;
 };
 
 export type UnbuiltIdea = {
@@ -140,6 +181,22 @@ export const built: BuiltProject[] = [
       // Facts: none given — what you learned building it, what you still see in it.
       whatILearned: "[WRITE: what I learned and what I still see in it]",
     },
+    // Facts: none recorded yet — what from PathBrew changed what you built or
+    // did next. If nothing has come after it yet, say what it's changing now.
+    carriedForward: "[WRITE: what from this project changed the next one]",
+    // Real figures only (users, paths generated, paying users, etc.).
+    // Example: { value: "120", label: "signups" }
+    numbers: [],
+    // Screenshots/links of real work. Or just drop files in
+    // public/projects/pathbrew/artifacts/.
+    // Example: { label: "Fork editor", file: "fork-editor.png", alt: "..." }
+    artifacts: [],
+    // Newest first is automatic. Add a line per entry; use "YYYY-MM-DD" dates.
+    // Facts you could log: Vercel/YouTube transcript-fetching workaround;
+    // branching engine; fork editor; generate/save/load round trip; AI
+    // refinement pipeline; unsaved-change tracking and one-level undo.
+    // Only log with real dates.
+    buildLog: [{ date: "[WRITE: YYYY-MM-DD]", entry: "[WRITE: what I did]" }],
   },
   {
     slug: "upsack",
@@ -162,6 +219,14 @@ export const built: BuiltProject[] = [
       // Facts: it was a small test of the idea behind Ozio (see "Not built yet").
       whatILearned: "[WRITE: what I learned and what I still see in it]",
     },
+    // Facts: Upsack was a small test of the idea behind Ozio (activity-first
+    // social app, in "Not built yet").
+    carriedForward: "[WRITE: what from this project changed the next one]",
+    // Real figures only. Known fact: recruited 5 small affiliate creators.
+    // Example: { value: "5", label: "affiliate creators recruited" }
+    numbers: [],
+    // e.g. creator outreach DMs, posts. Or drop files in public/projects/upsack/artifacts/.
+    artifacts: [],
   },
   {
     slug: "scaffold",
@@ -191,6 +256,15 @@ export const built: BuiltProject[] = [
       // Scaffold didn't really have any.
       whatILearned: "[WRITE: what I learned and what I still see in it]",
     },
+    // Facts: the lesson you've named — marketing matters, precisely because
+    // Scaffold didn't really have any. Say where that showed up next.
+    carriedForward: "[WRITE: what from this project changed the next one]",
+    // Real figures only. None recorded yet.
+    numbers: [],
+    // e.g. the marketing plan (Reddit/forum templates, cold DMs, scraping agent,
+    // Product Hunt, Indie Hackers, structured data, AI-search optimization).
+    // Or drop files in public/projects/scaffold/artifacts/.
+    artifacts: [],
   },
   {
     slug: "ugc-scripts",
@@ -214,6 +288,14 @@ export const built: BuiltProject[] = [
       // soft claims), view-based pay.
       whatILearned: "[WRITE: what I learned and what I still see in it]",
     },
+    // Facts: none recorded — what from the scripts (writing under stakes/claims
+    // constraints, view-based pay) changed what you did next.
+    carriedForward: "[WRITE: what from this project changed the next one]",
+    // Real figures only (e.g. views per video, pay). None recorded yet.
+    numbers: [],
+    // e.g. the scripts themselves (check you're allowed to share them).
+    // Or drop files in public/projects/ugc-scripts/artifacts/.
+    artifacts: [],
   },
   {
     slug: "chum",
@@ -237,6 +319,13 @@ export const built: BuiltProject[] = [
       // Facts: none given.
       whatILearned: "[WRITE: what I learned and what I still see in it]",
     },
+    // Facts: none recorded — what from Chum changed what you built next.
+    carriedForward: "[WRITE: what from this project changed the next one]",
+    // Real figures only. None recorded yet.
+    numbers: [],
+    // e.g. screenshots of the tooltip, IPA lookup, syllabifier.
+    // Or drop files in public/projects/chum/artifacts/.
+    artifacts: [],
   },
 ];
 
