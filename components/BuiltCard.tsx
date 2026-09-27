@@ -1,16 +1,9 @@
 import type { BuiltProject } from "@/content/site";
 import { Artifacts } from "./Artifacts";
-import { BuildLog } from "./BuildLog";
 import { MediaSlot } from "./MediaSlot";
+import { Sections } from "./Sections";
 import { StatusBadge } from "./StatusBadge";
-import { Inline, Prose } from "./Text";
-
-const SECTIONS: { key: keyof BuiltProject["sections"]; label: string }[] = [
-  { key: "whatIBuilt", label: "What I built" },
-  { key: "howItWasMeantToSpread", label: "How it was meant to spread" },
-  { key: "whatHappened", label: "What happened" },
-  { key: "whatILearned", label: "What I learned and what I still see in it" },
-];
+import { Inline } from "./Text";
 
 function hostname(url: string) {
   try {
@@ -106,13 +99,6 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
         </div>
       </div>
 
-      {project.carriedForward.trim() && (
-        <div className="mt-4 border-l-2 border-accent pl-3">
-          <h4 className="text-xs font-bold tracking-[0.08em] text-muted uppercase">Carried forward</h4>
-          <Prose text={project.carriedForward} className="mt-1" />
-        </div>
-      )}
-
       <details className="group mt-4 border-t border-border pt-3">
         <summary className="flex cursor-pointer items-center gap-2 rounded text-sm font-semibold text-accent select-none">
           <span
@@ -125,16 +111,10 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
           <span className="hidden group-open:inline">Show less</span>
           <span className="sr-only"> about {project.name}</span>
         </summary>
-        <div className="mt-4 grid gap-5 sm:grid-cols-2">
-          {SECTIONS.map(({ key, label }) => (
-            <section key={key}>
-              <h4 className="mb-1.5 text-xs font-bold tracking-[0.08em] text-muted uppercase">{label}</h4>
-              <Prose text={project.sections[key]} />
-            </section>
-          ))}
+        <div className="mt-4">
+          <Sections sections={project.sections} />
         </div>
         <Artifacts slug={project.slug} listed={project.artifacts} id={`${project.slug}-artifacts`} />
-        {project.buildLog && <BuildLog entries={project.buildLog} id={`${project.slug}-log`} />}
       </details>
     </article>
   );

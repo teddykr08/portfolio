@@ -11,6 +11,9 @@
  * Longer text: separate paragraphs with a blank line ("\n\n") inside the string,
  * or use a template literal (backticks) and just press enter twice.
  *
+ * Sections: each card's `sections` is a list, shown in that order. Add, remove
+ * or reorder freely. Leave `heading` out for a free-form block with no title.
+ *
  * Media: put ONE image (.jpg .jpeg .png .webp .avif .gif) or short video
  * (.mp4 .webm) in public/projects/<slug>/. It's picked up automatically.
  * If the folder has several files, set `media` on the project to the filename
@@ -24,6 +27,12 @@
 // ---------------------------------------------------------------------------
 // Types (you shouldn't need to edit these)
 // ---------------------------------------------------------------------------
+
+export type Section = {
+  /** Small title above the text. Leave out for a free-form block. */
+  heading?: string;
+  text: string;
+};
 
 export type BuiltProject = {
   /** Folder name under public/projects/ and the URL anchor. Lowercase, no spaces. */
@@ -41,14 +50,8 @@ export type BuiltProject = {
   media?: string;
   /** Alt text for the image (describe what's in it). Leave empty for a purely decorative video. */
   mediaAlt?: string;
-  sections: {
-    whatIBuilt: string;
-    howItWasMeantToSpread: string;
-    whatHappened: string;
-    whatILearned: string;
-  };
-  /** Shown on the collapsed card, right under the one-liner. */
-  carriedForward: string;
+  /** Shown when the card is opened ("Read more"), in this order. */
+  sections: Section[];
   /** Real figures only. Empty list = the Numbers row isn't shown. Entries with an empty value are skipped. */
   numbers: ProjectNumber[];
   /**
@@ -58,8 +61,6 @@ export type BuiltProject = {
    * link to something hosted elsewhere.
    */
   artifacts?: Artifact[];
-  /** Dated log. Sorted newest first automatically; 5 shown, the rest behind "Show all". */
-  buildLog?: LogEntry[];
 };
 
 export type ProjectNumber = {
@@ -80,22 +81,15 @@ export type Artifact = {
   alt?: string;
 };
 
-export type LogEntry = {
-  /** "YYYY-MM-DD", e.g. "2026-09-26". Used for sorting and shown as "Sep 26, 2026". */
-  date: string;
-  entry: string;
-};
-
 export type UnbuiltIdea = {
   slug: string;
   name: string;
   oneLiner: string;
+  /** Optional small badge next to the name, e.g. "Building now". */
+  badge?: string;
   /** true = not shown on the site. */
   hidden?: boolean;
-  sections: {
-    howItSpreads: string;
-    whatItNeeds: string;
-  };
+  sections: Section[];
 };
 
 export type SiteLink = {
@@ -147,6 +141,7 @@ export const site = {
   intro: "[WRITE: short intro, a few sentences]",
 };
 
+
 // ---------------------------------------------------------------------------
 // Built — shown in this order
 // ---------------------------------------------------------------------------
@@ -157,33 +152,35 @@ export const built: BuiltProject[] = [
     name: "PathBrew",
     // Facts: AI learning path generator; turns a topic or video into
     // slide-based learning paths, with branching tutorials.
+    // Stack: Next.js 15, Supabase, Stripe, OpenRouter.
+    // Built: branching engine (fork slides with choices that jump to other
+    // slides); in-app fork editor; generate/save/load round trip; AI
+    // refinement pipeline; save with unsaved-change tracking and one-level undo.
     oneLiner: "[WRITE: one line about PathBrew]",
     status: "Live",
     role: "Founder & Developer",
-    // Facts: built since Feb 2026. Confirm the end ("Present"?) yourself.
-    dates: "Feb 2026 – [WRITE: end or Present]",
+    dates: "Feb 2026 – Present",
     liveUrl: "https://pathbrew-demo.vercel.app",
     repoUrl: "https://github.com/teddykr08/pathbrew-demo",
     mediaAlt: "",
-    sections: {
-      // Facts: Next.js 15, Supabase, Stripe, OpenRouter.
-      // Built: branching engine (fork slides with choices that jump to other
-      // slides); in-app fork editor; generate/save/load round trip; AI
-      // refinement pipeline; save with unsaved-change tracking and one-level undo.
-      // Challenge: Vercel's servers get blocked by YouTube, which broke
-      // transcript fetching; needed a workaround (say what yours was).
-      whatIBuilt: "[WRITE: what I built]",
-      // Facts: none given — cover who it's for and how they'd find it / share it.
-      howItWasMeantToSpread: "[WRITE: how it was meant to spread]",
-      // Facts: traction — fill in real numbers only (users, paths generated,
-      // paying users, etc.). Nothing has been filled in for you.
-      whatHappened: "[WRITE: what happened]",
-      // Facts: none given — what you learned building it, what you still see in it.
-      whatILearned: "[WRITE: what I learned and what I still see in it]",
-    },
-    // Facts: none recorded yet — what from PathBrew changed what you built or
-    // did next. If nothing has come after it yet, say what it's changing now.
-    carriedForward: "[WRITE: what from this project changed the next one]",
+    sections: [
+      {
+        heading: "How it was meant to spread",
+        // Facts: none given — who it's for and how they'd find it / share it.
+        text: "[WRITE: how it was meant to spread]",
+      },
+      {
+        heading: "What I learned",
+        // Facts: challenge — Vercel's servers get blocked by YouTube, which
+        // broke transcript fetching; needed a workaround (say what yours was).
+        text: "[WRITE: what I learned]",
+      },
+      {
+        heading: "What I still see in it",
+        // Facts: none given.
+        text: "[WRITE: what I still see in it]",
+      },
+    ],
     // Real figures only (users, paths generated, paying users, etc.).
     // Example: { value: "120", label: "signups" }
     numbers: [],
@@ -191,12 +188,6 @@ export const built: BuiltProject[] = [
     // public/projects/pathbrew/artifacts/.
     // Example: { label: "Fork editor", file: "fork-editor.png", alt: "..." }
     artifacts: [],
-    // Newest first is automatic. Add a line per entry; use "YYYY-MM-DD" dates.
-    // Facts you could log: Vercel/YouTube transcript-fetching workaround;
-    // branching engine; fork editor; generate/save/load round trip; AI
-    // refinement pipeline; unsaved-change tracking and one-level undo.
-    // Only log with real dates.
-    buildLog: [{ date: "[WRITE: YYYY-MM-DD]", entry: "[WRITE: what I did]" }],
   },
   {
     slug: "upsack",
@@ -205,23 +196,31 @@ export const built: BuiltProject[] = [
     oneLiner: "[WRITE: one line about Upsack]",
     status: "Shut down",
     role: "Founder & Developer",
-    // Facts: worked on it about a month. No start/end dates recorded.
-    dates: "[WRITE: dates]",
+    dates: "May 2026",
     mediaAlt: "",
-    sections: {
-      // Facts: app built around the hacky sack trend; community around it.
-      // Went from idea to action in about a week.
-      whatIBuilt: "[WRITE: what I built]",
-      // Facts: recruited 5 small affiliate creators.
-      howItWasMeantToSpread: "[WRITE: how it was meant to spread]",
-      // Facts: worked on it about a month; died because the trend was already fading.
-      whatHappened: "[WRITE: what happened]",
-      // Facts: it was a small test of the idea behind Ozio (see "Not built yet").
-      whatILearned: "[WRITE: what I learned and what I still see in it]",
-    },
-    // Facts: Upsack was a small test of the idea behind Ozio (activity-first
-    // social app, in "Not built yet").
-    carriedForward: "[WRITE: what from this project changed the next one]",
+    sections: [
+      {
+        heading: "How it was meant to spread",
+        // Facts: recruited 5 small affiliate creators.
+        text: "[WRITE: how it was meant to spread]",
+      },
+      {
+        heading: "What happened",
+        // Facts: went from idea to action in about a week; worked on it about
+        // a month; died because the trend was already fading.
+        text: "[WRITE: what happened]",
+      },
+      {
+        heading: "What I learned",
+        // Facts: it was a small test of the idea behind Ozio.
+        text: "[WRITE: what I learned]",
+      },
+      {
+        heading: "What I still see in it",
+        // Facts: none given.
+        text: "[WRITE: what I still see in it]",
+      },
+    ],
     // Real figures only. Known fact: recruited 5 small affiliate creators.
     // Example: { value: "5", label: "affiliate creators recruited" }
     numbers: [],
@@ -231,39 +230,40 @@ export const built: BuiltProject[] = [
   {
     slug: "scaffold",
     name: "Scaffold",
-    // Facts: no-code form builder; {{variable}} placeholders generate
-    // pre-formatted prompts that open directly in ChatGPT; no API calls; free.
+    // Facts: no-code form builder at scaffoldtool.com; {{variable}}
+    // placeholders generate pre-formatted prompts that open directly in
+    // ChatGPT; no API calls; free.
     oneLiner: "[WRITE: one line about Scaffold]",
     // Fill in: e.g. "Live", "Shut down", "Paused".
     status: "[WRITE: status]",
-    role: "[WRITE: role]",
-    dates: "[WRITE: dates]",
+    role: "Founder & Developer",
+    dates: "Sep 2025 – Jan 2026",
     // Confirm scaffoldtool.com is still up before submitting; delete this line if not.
     liveUrl: "https://scaffoldtool.com",
     mediaAlt: "",
-    sections: {
-      // Facts: no-code form builder at scaffoldtool.com; {{variable}}
-      // placeholders generate pre-formatted prompts that open directly in
-      // ChatGPT; no API calls; free.
-      whatIBuilt: "[WRITE: what I built]",
-      // Facts: planned marketing — Reddit/forum templates, cold outreach DMs,
-      // a scraping agent, Product Hunt, Indie Hackers, structured data,
-      // AI-search optimization. (Say which, if any, actually happened.)
-      howItWasMeantToSpread: "[WRITE: how it was meant to spread]",
-      // Facts: Scaffold didn't really have any marketing. Add real results only.
-      whatHappened: "[WRITE: what happened]",
-      // Facts: lesson you've named — marketing matters, precisely because
-      // Scaffold didn't really have any.
-      whatILearned: "[WRITE: what I learned and what I still see in it]",
-    },
-    // Facts: the lesson you've named — marketing matters, precisely because
-    // Scaffold didn't really have any. Say where that showed up next.
-    carriedForward: "[WRITE: what from this project changed the next one]",
+    sections: [
+      {
+        heading: "How it was meant to spread",
+        // Facts: planned marketing — Reddit/forum templates, cold outreach DMs,
+        // a scraping agent, Product Hunt, Indie Hackers, structured data,
+        // AI-search optimization. (Say which, if any, actually happened.)
+        text: "[WRITE: how it was meant to spread]",
+      },
+      {
+        heading: "What I learned",
+        // Facts: lesson you've named — marketing matters, precisely because
+        // Scaffold didn't really have any.
+        text: "[WRITE: what I learned]",
+      },
+      {
+        heading: "What I still see in it",
+        // Facts: none given.
+        text: "[WRITE: what I still see in it]",
+      },
+    ],
     // Real figures only. None recorded yet.
     numbers: [],
-    // e.g. the marketing plan (Reddit/forum templates, cold DMs, scraping agent,
-    // Product Hunt, Indie Hackers, structured data, AI-search optimization).
-    // Or drop files in public/projects/scaffold/artifacts/.
+    // e.g. the marketing plan. Or drop files in public/projects/scaffold/artifacts/.
     artifacts: [],
   },
   {
@@ -273,25 +273,19 @@ export const built: BuiltProject[] = [
     oneLiner: "[WRITE: one line about the UGC scripts]",
     status: "Paid work",
     role: "Script writer",
-    dates: "[WRITE: dates]",
+    dates: "Jul 2026",
     mediaAlt: "",
-    sections: {
-      // Facts: wrote UGC video scripts for Wagr (real-money skill games app;
-      // careful language required around stakes) and Anoria
-      // (emotional-intelligence wearable; soft claims only).
-      whatIBuilt: "[WRITE: what I built]",
-      // Facts: UGC videos meant to spread on views; pay depended on views.
-      howItWasMeantToSpread: "[WRITE: how it was meant to spread]",
-      // Facts: the scripts didn't get enough views.
-      whatHappened: "[WRITE: what happened]",
-      // Facts: none given — e.g. writing under constraints (stakes language,
-      // soft claims), view-based pay.
-      whatILearned: "[WRITE: what I learned and what I still see in it]",
-    },
-    // Facts: none recorded — what from the scripts (writing under stakes/claims
-    // constraints, view-based pay) changed what you did next.
-    carriedForward: "[WRITE: what from this project changed the next one]",
-    // Real figures only (e.g. views per video, pay). None recorded yet.
+    sections: [
+      {
+        // Free-form, no heading. Your role on this one.
+        // Facts: wrote UGC video scripts for Wagr (real-money skill games app;
+        // careful language required around stakes) and Anoria
+        // (emotional-intelligence wearable; soft claims only). Pay depended on
+        // views; the scripts didn't get enough views.
+        text: "[WRITE: about my role on the scripts]",
+      },
+    ],
+    // Real figures only (e.g. views per video). None recorded yet.
     numbers: [],
     // e.g. the scripts themselves (check you're allowed to share them).
     // Or drop files in public/projects/ugc-scripts/artifacts/.
@@ -304,23 +298,19 @@ export const built: BuiltProject[] = [
     oneLiner: "[WRITE: one line about Chum]",
     status: "Personal tool",
     role: "Developer",
-    dates: "[WRITE: dates]",
+    dates: "Jun 2026",
     mediaAlt: "",
-    sections: {
-      // Facts: forked the mouse-tooltip-translator Chrome extension for
-      // AI-assisted language learning. Added offline French and Spanish IPA
-      // dictionaries, a custom syllabifier, and a clipboard-based standing
-      // prompt tool.
-      whatIBuilt: "[WRITE: what I built]",
-      // Facts: built for your own use — say so, or whether you ever meant to share it.
-      howItWasMeantToSpread: "[WRITE: how it was meant to spread]",
-      // Facts: built for your own Québécois French and Latin American Spanish learning.
-      whatHappened: "[WRITE: what happened]",
-      // Facts: none given.
-      whatILearned: "[WRITE: what I learned and what I still see in it]",
-    },
-    // Facts: none recorded — what from Chum changed what you built next.
-    carriedForward: "[WRITE: what from this project changed the next one]",
+    sections: [
+      {
+        // Free-form, no heading. A short description.
+        // Facts: forked the mouse-tooltip-translator Chrome extension for
+        // AI-assisted language learning. Added offline French and Spanish IPA
+        // dictionaries, a custom syllabifier, and a clipboard-based standing
+        // prompt tool. Built for your own Québécois French and Latin American
+        // Spanish learning.
+        text: "[WRITE: short description]",
+      },
+    ],
     // Real figures only. None recorded yet.
     numbers: [],
     // e.g. screenshots of the tooltip, IPA lookup, syllabifier.
@@ -335,29 +325,41 @@ export const built: BuiltProject[] = [
 
 export const notBuilt: UnbuiltIdea[] = [
   {
-    slug: "ozio",
-    name: "Ozio",
-    // Facts: activity-first social app; find and join real activities near you.
-    oneLiner: "[WRITE: one line about Ozio]",
-    sections: {
-      // Facts: none given beyond the concept. Upsack was a small test of this idea.
-      howItSpreads: "[WRITE: how it spreads]",
-      // Facts: has a full concept doc; building started and hit blockers
-      // (name the blockers).
-      whatItNeeds: "[WRITE: what it needs that I don't have yet]",
-    },
-  },
-  {
     slug: "splashy-cam",
     name: "Splashy Cam",
     // Facts: water-gun phone mount plus an app, for Senior Assassin and water fights.
     oneLiner: "[WRITE: one line about Splashy Cam]",
-    sections: {
-      // Facts: Senior Assassin and water fights.
-      howItSpreads: "[WRITE: how it spreads]",
-      // Facts: none given — e.g. hardware (the mount).
-      whatItNeeds: "[WRITE: what it needs that I don't have yet]",
-    },
+    // You have what it needs and are building it now. Delete this line if you'd rather not show it.
+    badge: "Building now",
+    sections: [
+      {
+        heading: "How it spreads",
+        // Facts: Senior Assassin and water fights.
+        text: "[WRITE: how it spreads]",
+      },
+    ],
+  },
+  {
+    // Hidden for now. Set hidden: false (or delete the line) to show it.
+    slug: "ozio",
+    name: "Ozio",
+    // Facts: activity-first social app; find and join real activities near you.
+    oneLiner: "[WRITE: one line about Ozio]",
+    hidden: true,
+    sections: [
+      {
+        heading: "How it spreads",
+        // Facts: none given beyond the concept. Upsack was a small test of this idea.
+        text: "[WRITE: how it spreads]",
+      },
+      {
+        heading: "What it needs that I don't have yet",
+        // Facts: full concept doc exists; building started and hit blockers.
+        // It's a bigger project (a social app); you want some capital first to
+        // do it properly.
+        text: "[WRITE: what it needs that I don't have yet]",
+      },
+    ],
   },
   {
     // Spare slot. Set hidden: false and fill it in, or delete this whole block.
@@ -365,10 +367,10 @@ export const notBuilt: UnbuiltIdea[] = [
     name: "[WRITE: name]",
     oneLiner: "[WRITE: one line]",
     hidden: true,
-    sections: {
-      howItSpreads: "[WRITE: how it spreads]",
-      whatItNeeds: "[WRITE: what it needs that I don't have yet]",
-    },
+    sections: [
+      { heading: "How it spreads", text: "[WRITE: how it spreads]" },
+      { heading: "What it needs that I don't have yet", text: "[WRITE: what it needs that I don't have yet]" },
+    ],
   },
 ];
 

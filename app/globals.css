@@ -36,6 +36,8 @@
   --status-personal-fg: #53306e;
   --status-default-bg: #ece6dc;
   --status-default-fg: #4f473c;
+  --status-building-bg: #f7e3c4;
+  --status-building-fg: #7a4210;
 
   /* Media placeholder box */
   --color-media-empty: #e6ddcc;
@@ -94,6 +96,8 @@
     --status-personal-fg: #d5b9ea;
     --status-default-bg: #332e27;
     --status-default-fg: #cfc5b4;
+    --status-building-bg: #3d2c16;
+    --status-building-fg: #f2c58e;
 
     --color-media-empty: #2a261f;
     --color-media-empty-text: #9d937f;
@@ -199,6 +203,10 @@
   .status-badge[data-status="personal"] {
     background: var(--status-personal-bg);
     color: var(--status-personal-fg);
+  }
+  .status-badge[data-status="building"] {
+    background: var(--status-building-bg);
+    color: var(--status-building-fg);
   }
   .status-badge[data-status="default"] {
     background: var(--status-default-bg);

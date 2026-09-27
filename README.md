@@ -53,11 +53,18 @@ Notes:
 - The box is 16:10 and the media is cropped to fill it. Wide screenshots (about 1600×1000) work best.
 - Images are resized and compressed automatically. Videos are not: keep them short (under about 10 seconds) and small (under about 3 MB). Videos play muted and on a loop, and they're paused for visitors who've turned on "reduce motion".
 
-## Numbers, Carried forward, Artifacts, Build log
+## Sections, Numbers, Artifacts
 
 Each built project in `content/site.ts` also has:
 
-- **`carriedForward`**: shown on the closed card, under the links. It's what from this project changed the next one.
+- **`sections`**: the text shown when the card is opened ("Read more"), in the order listed. Each one has an optional `heading`. Leave the heading out for a free-form block. Add, remove or reorder them freely:
+  ```ts
+  sections: [
+    { heading: "What I learned", text: "..." },
+    { text: "A free-form paragraph with no heading." },
+  ],
+  ```
+  The "Not built yet" cards use the same format. Those cards can also have a `badge` (e.g. `"Building now"`), and `hidden: true` hides a card.
 - **`numbers`**: real figures only, shown as small boxes on the closed card. If the list is empty, nothing is shown.
   ```ts
   numbers: [{ value: "5", label: "affiliate creators recruited" }],
@@ -74,13 +81,6 @@ Each built project in `content/site.ts` also has:
     ```
   - A listed `file` that isn't in the folder is skipped, not shown broken. Files you don't list are added after the listed ones.
   - Blur or crop anything private (names and handles in DMs) before adding it.
-- **`buildLog`** (PathBrew only for now; any project can have one): a dated log shown when the card is opened. Entries are sorted newest first automatically, so add them anywhere in the list. The 5 newest are shown and the rest are behind "Show all".
-  ```ts
-  buildLog: [
-    { date: "2026-09-26", entry: "What I did." },
-  ],
-  ```
-  Dates must be `YYYY-MM-DD`. They're displayed as "Sep 26, 2026". An entry without a valid date is pinned to the top so you notice it. Delete the starter `[WRITE: ...]` entry once you've added real ones.
 
 ## Design accents
 

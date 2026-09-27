@@ -54,7 +54,7 @@ export default function Home() {
               <h2 id="ideas-heading" className="mb-5 font-display text-2xl font-bold text-muted">
                 Not built yet
               </h2>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className={`grid gap-4 ${ideas.length > 1 ? "sm:grid-cols-2" : ""}`}>
                 {ideas.map((idea) => (
                   <IdeaCard key={idea.slug} idea={idea} />
                 ))}
