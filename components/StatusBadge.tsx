@@ -4,6 +4,7 @@ const VARIANTS: Record<string, string> = {
   live: "live",
   "shut down": "shutdown",
   "paid work": "paid",
+  internship: "paid",
   "personal tool": "personal",
 };
 

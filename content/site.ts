@@ -39,7 +39,7 @@ export type BuiltProject = {
   slug: string;
   name: string;
   oneLiner: string;
-  /** Shown as a badge. Known values get a color: "Live", "Shut down", "Paid work", "Personal tool". */
+  /** Shown as a badge. Known values get a color: "Live", "Shut down", "Internship", "Personal tool". */
   status: string;
   role: string;
   /** Free text, e.g. "Feb 2026 – Present". */
@@ -171,7 +171,7 @@ export const built: BuiltProject[] = [
         heading: "How it was meant to spread",
         // Your notes: word of mouth. You found people on forums asking how to
         // do something and replied with a PathBrew link.
-        text: "It was really meant to spread by word of mouth. I was finding people on forums who were asking how to do something, and responded to them with the link.",
+        text: "The only way it could spread, really, is by word of mouth and traditional marketing, just making people aware of it. Without money, it's only word of mouth. I was finding people on forums who were asking how to do something, and responded to them with the link.",
       },
       {
         heading: "What I learned",
@@ -180,7 +180,7 @@ export const built: BuiltProject[] = [
         // Your notes: you half-knew it already, but general-purpose tools are
         // hard to market. No built-in social/spread loop beyond word of mouth
         // and awareness. That's part of why you like social apps.
-        text: "I already kind of knew this, but general projects like this are hard to market. The social part isn't built in, and there isn't really spread besides word of mouth and getting awareness.",
+        text: "I already kind of knew this, but general projects like this are hard to market. It's a project I really like, but it doesn't have the growth capabilities built in that I've seen in other things. Having a specific niche for it would be good.",
       },
       {
         heading: "What I still see in it",
@@ -189,7 +189,7 @@ export const built: BuiltProject[] = [
         // (compiling info that already exists), and convenience isn't always
         // enough. The user has to think of what to put in, which makes it hard
         // to start using.
-        text: "I still see a lot of potential, but it's something that takes implementation into a routine. It's not the best problem solver ever; it compiles other information, so if the information already exists, the advantage is convenience. But convenience sometimes isn't enough for something that doesn't feel like it fits in. The user needs to think of what they want to put into it, which makes it hard to start.",
+        text: "I still see a lot of potential, but it's something that takes implementation into a routine. It's not the best problem solver ever; it compiles other information, so if the information already exists, the advantage is convenience. And convenience is enough for somebody to put it inside of a routine.",
       },
     ],
     // Real figures only (users, paths generated, paying users, etc.).
@@ -252,10 +252,9 @@ export const built: BuiltProject[] = [
   {
     slug: "scaffold",
     name: "Scaffold",
-    // Facts: no-code form builder at scaffoldtool.com; {{variable}}
-    // placeholders generate pre-formatted prompts that open directly in
-    // ChatGPT; no API calls; free.
-    oneLiner: "[WRITE: one line about Scaffold]",
+    // Facts: embeds AI into sites, like an AI wrapper, without paying for an
+    // API key. Forms fill a prompt's blanks, then open it in ChatGPT.
+    oneLiner: "A way to embed AI into your site, like an AI wrapper, without having to pay for an API key.",
     // "Finished" stays true whether or not the site is still up.
     status: "Finished",
     role: "Founder & Developer",
@@ -265,11 +264,16 @@ export const built: BuiltProject[] = [
     mediaAlt: "",
     sections: [
       {
+        heading: "How it worked",
+        // Delete this section if you'd rather not explain it.
+        text: "It used forms with a prompt that had pre-filled spaces, and the questions on the form determined what goes in those spaces. The form then brought the user to ChatGPT to complete it, using ChatGPT URLs that can embed a prompt, so the prompt could carry context and the user's answers.",
+      },
+      {
         heading: "How it was meant to spread",
         // Facts: planned marketing — Reddit/forum templates, cold outreach DMs,
         // a scraping agent, Product Hunt, Indie Hackers, structured data,
         // AI-search optimization. (Say which, if any, actually happened.)
-        text: "[WRITE: how it was meant to spread]",
+        text: "Through B2B SaaS means, except it was for small devs, so really just through forums.",
       },
       {
         heading: "What I learned",
@@ -278,12 +282,12 @@ export const built: BuiltProject[] = [
         // Your notes: your first-ever project; learned basic marketing
         // tactics (which you still think matter most); discovering tools —
         // which to use, which not to, which just add steps; time.
-        text: "Scaffold was my first ever project, and I learned a lot. Basic marketing tactics, which I still think is the most important part. Using and discovering tools: just as important as the ones to use are the ones not to use, and the ones that just add steps. It was a big learning experience.",
+        text: "Scaffold was my first ever project, and I learned a lot. Basic marketing tactics, which I still think is the most important part. Using and discovering tools: just as important as the ones to use are the ones not to use, and the ones that just add steps. And something that's hard to explain is hard to sell people on.",
       },
       {
         heading: "What I still see in it",
         // Facts: none given.
-        text: "[WRITE: what I still see in it]",
+        text: "The gap it fills, free AI embedding, is getting smaller and smaller. The execution that allows it to be free is simpler, but has less potential, less you can do with it, than a traditional AI wrapper that uses an API key.",
       },
     ],
     // Real figures only. None recorded yet.
@@ -295,8 +299,8 @@ export const built: BuiltProject[] = [
     slug: "ugc-scripts",
     name: "UGC scripts for Wagr and Anoria",
     // Facts: user-generated-content video scripts for two apps.
-    oneLiner: "[WRITE: one line about the UGC scripts]",
-    status: "Paid work",
+    oneLiner: "Interning for a UGC agency.",
+    status: "Internship",
     role: "Script writer",
     dates: "Jul 2026",
     mediaAlt: "",
@@ -344,7 +348,7 @@ export const built: BuiltProject[] = [
         // lines to translate and see how to pronounce them. You're immersed
         // while doing whatever else you're working on, and you pick up
         // vocabulary tied to your own interests.
-        text: "(An extension right now, but potentially its own chatbot later on.) It makes AI chats into learning experiences for languages: adaptable to your level, but pushing you. The AI chats in the other language, and I can translate selected lines and see how to pronounce things. That way I'm immersed in a language while I do whatever else I'm working on, and I learn vocabulary relevant to my interests and what I'm chatting with AI about.",
+        text: "Among other things, the AI chats in another language and teaches a lesson that has to do with what you're learning about. If you're a beginner, for example, it teaches you the basics while you're having that chat. It adapts to your level but pushes you, and I can translate selected lines and see how to pronounce things. That way I'm immersed in a language while I do whatever else I'm working on, and I learn vocabulary relevant to my interests. Right now it's an extension; later it could be a chatbot that uses more UI capabilities of a custom interface, which will make it even better.",
       },
     ],
     // Real figures only. None recorded yet.
@@ -377,7 +381,7 @@ export const notBuilt: UnbuiltIdea[] = [
         // Your notes: through the existing structure — the game runner/host
         // at each school — who promotes it and shows why it's needed within
         // the current game; affiliate deals with the game owners.
-        text: "It uses the existing hierarchy (the game runner or host for each school, with affiliate deals with the game owners) to promote it and show the necessity of the product within the current system.",
+        text: "It uses the existing hierarchy (the game runner or host for each school, with affiliate deals with the game owners) to make people aware of the gap it fills and the advantage it gives them in the current system.",
       },
     ],
   },
@@ -393,7 +397,7 @@ export const notBuilt: UnbuiltIdea[] = [
         // Your notes: social apps have the most interesting marketing
         // possibilities, and creative marketing is your favorite part. You
         // already have marketing ideas, some that need no money.
-        text: "Social apps have the most interesting marketing possibilities, and creatively marketing is my favorite part of this. The marketing ideas I've already come up with for Ozio are something I'm eager to get to, and they don't even require money.",
+        text: "Social apps have the most interesting marketing possibilities, and creatively marketing is my favorite part of this. I already have marketing ideas for Ozio that I'm eager to get to.",
       },
       {
         heading: "Why not yet",
@@ -403,7 +407,7 @@ export const notBuilt: UnbuiltIdea[] = [
         // (it helps with programs, schools, network, reputation), and Ozio
         // didn't feel like the surest first bet. It also felt too big and
         // money-dependent, even though it isn't entirely.
-        text: "It's my passion project, but I know I need more capital to do it justice. To give it a good head start, it does require money.",
+        text: "It's my passion project, and it's a big project with a longer growth stage. The truth is I want to get one successful project first, to learn what I can and get a confidence boost that will propel me through it. Capital will help too, but confidence will really propel it and make sure I stick by it.",
       },
     ],
   },
