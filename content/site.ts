@@ -204,7 +204,7 @@ export const built: BuiltProject[] = [
     slug: "upsack",
     name: "Upsack",
     // Facts: app built around the hacky sack trend; a community around it.
-    oneLiner: "[WRITE: one line about Upsack]",
+    oneLiner: "A local social media app for hacky sack.",
     status: "Shut down",
     role: "Founder & Developer",
     dates: "May 2026",
@@ -297,7 +297,7 @@ export const built: BuiltProject[] = [
   },
   {
     slug: "ugc-scripts",
-    name: "UGC scripts for Wagr and Anoria",
+    name: "UGC scripts for startups Wagr and Anoria",
     // Facts: user-generated-content video scripts for two apps.
     oneLiner: "Interning for a UGC agency.",
     status: "Internship",
@@ -381,7 +381,7 @@ export const notBuilt: UnbuiltIdea[] = [
         // Your notes: through the existing structure — the game runner/host
         // at each school — who promotes it and shows why it's needed within
         // the current game; affiliate deals with the game owners.
-        text: "It uses the existing hierarchy (the game runner or host for each school, with affiliate deals with the game owners) to make people aware of the gap it fills and the advantage it gives them in the current system.",
+        text: "It uses the existing hierarchy (the game runner or host for each school, with affiliate deals with the game owners) to make people aware of the gap it fills and the advantage it gives them in the current system. The gap it fills is already a part of the game.",
       },
     ],
   },
@@ -407,7 +407,7 @@ export const notBuilt: UnbuiltIdea[] = [
         // (it helps with programs, schools, network, reputation), and Ozio
         // didn't feel like the surest first bet. It also felt too big and
         // money-dependent, even though it isn't entirely.
-        text: "It's my passion project, and it's a big project with a longer growth stage. The truth is I want to get one successful project first, to learn what I can and get a confidence boost that will propel me through it. Capital will help too, but confidence will really propel it and make sure I stick by it.",
+        text: "It's my passion project, and it's a big project with a longer growth stage. The truth is I want to get one successful project first, to learn what I can and get a confidence boost that will propel me through it. The confidence and capital from one successful(ish) project will put me in a good spot to build it, and that's what I want right now before I build it (subject to change). I think it's something people will only want more and more. It will only become more desirable because it's not AI-based.",
       },
     ],
   },
