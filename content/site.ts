@@ -159,7 +159,7 @@ export const built: BuiltProject[] = [
     // Your notes: "NotebookLM for tutorials" — take sources or pasted text and
     // turn them into a formatted tutorial. You feel there's nothing else like it
     // (a strong claim; be ready to say what's different).
-    oneLiner: "[WRITE: one line about PathBrew]",
+    oneLiner: "NotebookLM for tutorials: take sources, paste the text, and turn it into a formatted tutorial. There's nothing else like it.",
     status: "Live",
     role: "Founder & Developer",
     dates: "Feb 2026 – Present",
@@ -171,7 +171,7 @@ export const built: BuiltProject[] = [
         heading: "How it was meant to spread",
         // Your notes: word of mouth. You found people on forums asking how to
         // do something and replied with a PathBrew link.
-        text: "[WRITE: how it was meant to spread]",
+        text: "It was really meant to spread by word of mouth. I was finding people on forums who were asking how to do something, and responded to them with the link.",
       },
       {
         heading: "What I learned",
@@ -180,7 +180,7 @@ export const built: BuiltProject[] = [
         // Your notes: you half-knew it already, but general-purpose tools are
         // hard to market. No built-in social/spread loop beyond word of mouth
         // and awareness. That's part of why you like social apps.
-        text: "[WRITE: what I learned]",
+        text: "I already kind of knew this, but general projects like this are hard to market. The social part isn't built in, and there isn't really spread besides word of mouth and getting awareness.",
       },
       {
         heading: "What I still see in it",
@@ -189,7 +189,7 @@ export const built: BuiltProject[] = [
         // (compiling info that already exists), and convenience isn't always
         // enough. The user has to think of what to put in, which makes it hard
         // to start using.
-        text: "[WRITE: what I still see in it]",
+        text: "I still see a lot of potential, but it's something that takes implementation into a routine. It's not the best problem solver ever; it compiles other information, so if the information already exists, the advantage is convenience. But convenience sometimes isn't enough for something that doesn't feel like it fits in. The user needs to think of what they want to put into it, which makes it hard to start.",
       },
     ],
     // Real figures only (users, paths generated, paying users, etc.).
@@ -216,7 +216,7 @@ export const built: BuiltProject[] = [
         // Your notes: a focused version of Ozio (community, friends,
         // looking-for-group), aimed at the hacky sack trend you saw. A
         // coalition of many small creators as affiliates.
-        text: "[WRITE: how it was meant to spread]",
+        text: "It was meant to spread as a focused version of Ozio, with all the community and friend aspects and looking-for-group, except focused on the hacky sack trend that I witnessed.",
       },
       {
         heading: "What happened",
@@ -227,7 +227,7 @@ export const built: BuiltProject[] = [
         // the trend was dying. Had the beginnings of monetization, but it
         // wasn't thought out; a rushed build on a dying trend left no room to
         // learn what people wanted or to make it good.
-        text: "[WRITE: what happened]",
+        text: "I told myself I would study for my finals and finish another project first, so I got to it a little late. When the trend was coming down, I launched it and marketed it as quick as I could, and got a coalition of many small creators to be affiliates. I had the beginnings of monetization, but it wasn't thought out enough. Building it was quick; making it good, seeing what people wanted and monetizing it wasn't something an app grasping at a dying trend was good for.",
       },
       {
         heading: "What I learned",
@@ -235,12 +235,12 @@ export const built: BuiltProject[] = [
         // Your notes: marketing with creators and how effective it is for
         // certain kinds of apps; collab posts vs. creators making their own
         // content; the details of working with creators.
-        text: "[WRITE: what I learned]",
+        text: "Marketing with creators, and how effective it is for specific types of apps. The difference between collab posting with a creator and having them make their own content, and the intricacies of working with creators.",
       },
       {
         heading: "What I still see in it",
         // Your notes: the parts of it that carry over to Ozio.
-        text: "[WRITE: what I still see in it]",
+        text: "Parts of it that would be applied to Ozio.",
       },
     ],
     // Real figures only. Known fact: recruited 5 small affiliate creators.
@@ -278,7 +278,7 @@ export const built: BuiltProject[] = [
         // Your notes: your first-ever project; learned basic marketing
         // tactics (which you still think matter most); discovering tools —
         // which to use, which not to, which just add steps; time.
-        text: "[WRITE: what I learned]",
+        text: "Scaffold was my first ever project, and I learned a lot. Basic marketing tactics, which I still think is the most important part. Using and discovering tools: just as important as the ones to use are the ones not to use, and the ones that just add steps. It was a big learning experience.",
       },
       {
         heading: "What I still see in it",
@@ -311,7 +311,7 @@ export const built: BuiltProject[] = [
         // doing only the marketing side. Reached out to an agency you'd seen
         // around and asked if they wanted an intern; worked with them for a
         // while until the agency wound down and its people moved on.
-        text: "[WRITE: about my role on the scripts]",
+        text: "Because of how important marketing is, it came to me that some experience doing just the marketing for products could be good. So I reached out to an agency I had seen around and asked if they wanted an intern, and worked with them for a little bit. Then the agency went defunct and they went elsewhere.",
       },
     ],
     // Real figures only (e.g. views per video). None recorded yet.
@@ -325,7 +325,7 @@ export const built: BuiltProject[] = [
     name: "Chum",
     // Facts: Chrome extension for AI-assisted language learning.
     // Your notes: a language learning tool you use yourself.
-    oneLiner: "[WRITE: one line about Chum]",
+    oneLiner: "A language learning tool that I use myself.",
     status: "Personal tool",
     role: "Developer",
     dates: "Jun 2026",
@@ -344,7 +344,7 @@ export const built: BuiltProject[] = [
         // lines to translate and see how to pronounce them. You're immersed
         // while doing whatever else you're working on, and you pick up
         // vocabulary tied to your own interests.
-        text: "[WRITE: short description]",
+        text: "(An extension right now, but potentially its own chatbot later on.) It makes AI chats into learning experiences for languages: adaptable to your level, but pushing you. The AI chats in the other language, and I can translate selected lines and see how to pronounce things. That way I'm immersed in a language while I do whatever else I'm working on, and I learn vocabulary relevant to my interests and what I'm chatting with AI about.",
       },
     ],
     // Real figures only. None recorded yet.
@@ -367,7 +367,7 @@ export const notBuilt: UnbuiltIdea[] = [
     // Your notes: a physical/digital product for Senior Assassin that fills a
     // gap. Senior Assassin is trendy, nationwide, a big but seasonal market.
     // Reviewers may not know the game, so a few words explaining it helps.
-    oneLiner: "[WRITE: one line about Splashy Cam]",
+    oneLiner: "A physical/digital product for Senior Assassin that fills a present gap. Senior Assassin is a trendy thing, nationwide, with a big but seasonal market.",
     // You have what it needs and are building it now. Delete this line if you'd rather not show it.
     badge: "Building now",
     sections: [
@@ -377,7 +377,7 @@ export const notBuilt: UnbuiltIdea[] = [
         // Your notes: through the existing structure — the game runner/host
         // at each school — who promotes it and shows why it's needed within
         // the current game; affiliate deals with the game owners.
-        text: "[WRITE: how it spreads]",
+        text: "It uses the existing hierarchy (the game runner or host for each school, with affiliate deals with the game owners) to promote it and show the necessity of the product within the current system.",
       },
     ],
   },
@@ -385,7 +385,7 @@ export const notBuilt: UnbuiltIdea[] = [
     slug: "ozio",
     name: "Ozio",
     // Facts: activity-first social app; find and join real activities near you.
-    oneLiner: "[WRITE: one line about Ozio]",
+    oneLiner: "Activity-first social app: find and join real activities near you.",
     sections: [
       {
         heading: "How it spreads",
@@ -393,7 +393,7 @@ export const notBuilt: UnbuiltIdea[] = [
         // Your notes: social apps have the most interesting marketing
         // possibilities, and creative marketing is your favorite part. You
         // already have marketing ideas, some that need no money.
-        text: "[WRITE: how it spreads]",
+        text: "Social apps have the most interesting marketing possibilities, and creatively marketing is my favorite part of this. The marketing ideas I've already come up with for Ozio are something I'm eager to get to, and they don't even require money.",
       },
       {
         heading: "Why not yet",
@@ -403,7 +403,7 @@ export const notBuilt: UnbuiltIdea[] = [
         // (it helps with programs, schools, network, reputation), and Ozio
         // didn't feel like the surest first bet. It also felt too big and
         // money-dependent, even though it isn't entirely.
-        text: "[WRITE: why not yet]",
+        text: "It's my passion project, but I know I need more capital to do it justice. To give it a good head start, it does require money.",
       },
     ],
   },
