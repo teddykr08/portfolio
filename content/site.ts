@@ -156,6 +156,9 @@ export const built: BuiltProject[] = [
     // Built: branching engine (fork slides with choices that jump to other
     // slides); in-app fork editor; generate/save/load round trip; AI
     // refinement pipeline; save with unsaved-change tracking and one-level undo.
+    // Your notes: "NotebookLM for tutorials" — take sources or pasted text and
+    // turn them into a formatted tutorial. You feel there's nothing else like it
+    // (a strong claim; be ready to say what's different).
     oneLiner: "[WRITE: one line about PathBrew]",
     status: "Live",
     role: "Founder & Developer",
@@ -166,18 +169,26 @@ export const built: BuiltProject[] = [
     sections: [
       {
         heading: "How it was meant to spread",
-        // Facts: none given — who it's for and how they'd find it / share it.
+        // Your notes: word of mouth. You found people on forums asking how to
+        // do something and replied with a PathBrew link.
         text: "[WRITE: how it was meant to spread]",
       },
       {
         heading: "What I learned",
         // Facts: challenge — Vercel's servers get blocked by YouTube, which
         // broke transcript fetching; needed a workaround (say what yours was).
+        // Your notes: you half-knew it already, but general-purpose tools are
+        // hard to market. No built-in social/spread loop beyond word of mouth
+        // and awareness. That's part of why you like social apps.
         text: "[WRITE: what I learned]",
       },
       {
         heading: "What I still see in it",
-        // Facts: none given.
+        // Your notes: still a lot of potential, but it has to become part of
+        // someone's routine. Like NotebookLM, its edge is convenience
+        // (compiling info that already exists), and convenience isn't always
+        // enough. The user has to think of what to put in, which makes it hard
+        // to start using.
         text: "[WRITE: what I still see in it]",
       },
     ],
@@ -202,22 +213,33 @@ export const built: BuiltProject[] = [
       {
         heading: "How it was meant to spread",
         // Facts: recruited 5 small affiliate creators.
+        // Your notes: a focused version of Ozio (community, friends,
+        // looking-for-group), aimed at the hacky sack trend you saw. A
+        // coalition of many small creators as affiliates.
         text: "[WRITE: how it was meant to spread]",
       },
       {
         heading: "What happened",
         // Facts: went from idea to action in about a week; worked on it about
         // a month; died because the trend was already fading.
+        // Your notes: you put finals and finishing another project first, so
+        // you got to it late. Launched and marketed as fast as you could while
+        // the trend was dying. Had the beginnings of monetization, but it
+        // wasn't thought out; a rushed build on a dying trend left no room to
+        // learn what people wanted or to make it good.
         text: "[WRITE: what happened]",
       },
       {
         heading: "What I learned",
         // Facts: it was a small test of the idea behind Ozio.
+        // Your notes: marketing with creators and how effective it is for
+        // certain kinds of apps; collab posts vs. creators making their own
+        // content; the details of working with creators.
         text: "[WRITE: what I learned]",
       },
       {
         heading: "What I still see in it",
-        // Facts: none given.
+        // Your notes: the parts of it that carry over to Ozio.
         text: "[WRITE: what I still see in it]",
       },
     ],
@@ -234,11 +256,11 @@ export const built: BuiltProject[] = [
     // placeholders generate pre-formatted prompts that open directly in
     // ChatGPT; no API calls; free.
     oneLiner: "[WRITE: one line about Scaffold]",
-    // Fill in: e.g. "Live", "Shut down", "Paused".
-    status: "[WRITE: status]",
+    // "Finished" stays true whether or not the site is still up.
+    status: "Finished",
     role: "Founder & Developer",
     dates: "Sep 2025 – Jan 2026",
-    // Confirm scaffoldtool.com is still up before submitting; delete this line if not.
+    // May shut down (Supabase room). Check it's up before submitting; delete this line if not.
     liveUrl: "https://scaffoldtool.com",
     mediaAlt: "",
     sections: [
@@ -253,6 +275,9 @@ export const built: BuiltProject[] = [
         heading: "What I learned",
         // Facts: lesson you've named — marketing matters, precisely because
         // Scaffold didn't really have any.
+        // Your notes: your first-ever project; learned basic marketing
+        // tactics (which you still think matter most); discovering tools —
+        // which to use, which not to, which just add steps; time.
         text: "[WRITE: what I learned]",
       },
       {
@@ -282,6 +307,10 @@ export const built: BuiltProject[] = [
         // careful language required around stakes) and Anoria
         // (emotional-intelligence wearable; soft claims only). Pay depended on
         // views; the scripts didn't get enough views.
+        // Your notes: marketing mattered so much that you wanted experience
+        // doing only the marketing side. Reached out to an agency you'd seen
+        // around and asked if they wanted an intern; worked with them for a
+        // while until the agency wound down and its people moved on.
         text: "[WRITE: about my role on the scripts]",
       },
     ],
@@ -295,6 +324,7 @@ export const built: BuiltProject[] = [
     slug: "chum",
     name: "Chum",
     // Facts: Chrome extension for AI-assisted language learning.
+    // Your notes: a language learning tool you use yourself.
     oneLiner: "[WRITE: one line about Chum]",
     status: "Personal tool",
     role: "Developer",
@@ -308,6 +338,12 @@ export const built: BuiltProject[] = [
         // dictionaries, a custom syllabifier, and a clipboard-based standing
         // prompt tool. Built for your own Québécois French and Latin American
         // Spanish learning.
+        // Your notes: an extension for now, maybe its own chatbot later.
+        // Turns AI chats into language practice: the AI chats in the other
+        // language, adapts to your level while pushing you, and you can select
+        // lines to translate and see how to pronounce them. You're immersed
+        // while doing whatever else you're working on, and you pick up
+        // vocabulary tied to your own interests.
         text: "[WRITE: short description]",
       },
     ],
@@ -328,6 +364,9 @@ export const notBuilt: UnbuiltIdea[] = [
     slug: "splashy-cam",
     name: "Splashy Cam",
     // Facts: water-gun phone mount plus an app, for Senior Assassin and water fights.
+    // Your notes: a physical/digital product for Senior Assassin that fills a
+    // gap. Senior Assassin is trendy, nationwide, a big but seasonal market.
+    // Reviewers may not know the game, so a few words explaining it helps.
     oneLiner: "[WRITE: one line about Splashy Cam]",
     // You have what it needs and are building it now. Delete this line if you'd rather not show it.
     badge: "Building now",
@@ -335,29 +374,36 @@ export const notBuilt: UnbuiltIdea[] = [
       {
         heading: "How it spreads",
         // Facts: Senior Assassin and water fights.
+        // Your notes: through the existing structure — the game runner/host
+        // at each school — who promotes it and shows why it's needed within
+        // the current game; affiliate deals with the game owners.
         text: "[WRITE: how it spreads]",
       },
     ],
   },
   {
-    // Hidden for now. Set hidden: false (or delete the line) to show it.
     slug: "ozio",
     name: "Ozio",
     // Facts: activity-first social app; find and join real activities near you.
     oneLiner: "[WRITE: one line about Ozio]",
-    hidden: true,
     sections: [
       {
         heading: "How it spreads",
-        // Facts: none given beyond the concept. Upsack was a small test of this idea.
+        // Facts: Upsack was a small test of this idea.
+        // Your notes: social apps have the most interesting marketing
+        // possibilities, and creative marketing is your favorite part. You
+        // already have marketing ideas, some that need no money.
         text: "[WRITE: how it spreads]",
       },
       {
-        heading: "What it needs that I don't have yet",
+        heading: "Why not yet",
         // Facts: full concept doc exists; building started and hit blockers.
-        // It's a bigger project (a social app); you want some capital first to
-        // do it properly.
-        text: "[WRITE: what it needs that I don't have yet]",
+        // Your notes: your passion project. Money would give it a real head
+        // start. The honest reason: right now you want one clear success first
+        // (it helps with programs, schools, network, reputation), and Ozio
+        // didn't feel like the surest first bet. It also felt too big and
+        // money-dependent, even though it isn't entirely.
+        text: "[WRITE: why not yet]",
       },
     ],
   },
