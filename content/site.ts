@@ -39,7 +39,7 @@ export type BuiltProject = {
   slug: string;
   name: string;
   oneLiner: string;
-  /** Shown as a badge. Known values get a color: "Live", "Shut down", "Internship", "Personal tool". */
+  /** Shown as a badge. Known values get a color: "Live", "Launched", "Shut down", "Internship", "Personal tool", "Building now". */
   status: string;
   role: string;
   /** Free text, e.g. "Feb 2026 – Present". */
@@ -50,10 +50,21 @@ export type BuiltProject = {
   media?: string;
   /** Alt text for the image (describe what's in it). Leave empty for a purely decorative video. */
   mediaAlt?: string;
+  /** Optional small line under the title, e.g. "Scripts for Wagr and Anoria". */
+  subtitle?: string;
+  /** Extra label/value rows next to role and dates, e.g. { label: "Based on", value: "..." }. */
+  meta?: MetaRow[];
+  /** Shown on the closed card. Leave out or empty to hide. */
+  carriedForward?: string;
   /** Shown when the card is opened ("Read more"), in this order. */
   sections: Section[];
-  /** Real figures only. Empty list = the Numbers row isn't shown. Entries with an empty value are skipped. */
+  /**
+   * Real figures only. The FIRST one shows on the closed card; the rest show
+   * when it's opened. Empty list = nothing shown.
+   */
   numbers: ProjectNumber[];
+  /** Dated log, sorted newest first automatically; 5 shown, the rest behind "Show all". */
+  buildLog?: LogEntry[];
   /**
    * Proof of real work, shown in the expanded card. Files in
    * public/projects/<slug>/artifacts/ appear automatically (filename as the
@@ -64,10 +75,28 @@ export type BuiltProject = {
 };
 
 export type ProjectNumber = {
-  /** The figure itself, e.g. "120". */
-  value: string;
+  /** The figure itself, e.g. "120". Leave out for a text-only item. */
+  value?: string;
   /** What it counts, e.g. "signups". */
   label: string;
+};
+
+export type MetaRow = {
+  label: string;
+  value: string;
+};
+
+export type LogEntry = {
+  /** "YYYY-MM-DD", e.g. "2026-09-26". Used for sorting and shown as "Sep 26, 2026". */
+  date: string;
+  entry: string;
+};
+
+export type OtherWorkItem = {
+  name: string;
+  role: string;
+  dates: string;
+  oneLiner: string;
 };
 
 export type Artifact = {
@@ -134,6 +163,11 @@ export const site = {
   // Facts: high school senior who builds consumer products.
   tagline: "[WRITE: one line about me]",
 
+  // Small facts line under the tagline.
+  // Facts to pick from: grade, city, building solo since Sep 2025, or whatever
+  // facts you choose.
+  facts: "[WRITE: grade, city, building solo since Sep 2025, or whatever facts Teddy picks]",
+
   // Intro: a few sentences.
   // Facts to consider: high school senior; builds consumer products; this site
   // is for the Horowitz Andreessen Academy application; what ties the projects
@@ -143,118 +177,63 @@ export const site = {
 
 
 // ---------------------------------------------------------------------------
+// Now — what you're building at the moment (full card + build log)
+// ---------------------------------------------------------------------------
+
+export const now: BuiltProject[] = [
+  {
+    slug: "splashy-cam",
+    name: "Splashy Cam",
+    // Facts: a phone mount that straps onto water guns, even cheap kids' ones,
+    // with the camera pointing along the barrel, plus an app that records front
+    // and back cameras with a tamper-proof stamp to prove hits; Senior Assassin
+    // first, then a cheap POV camera option.
+    oneLiner: "[WRITE: what it is, plainly]",
+    status: "Building now",
+    role: "Founder",
+    dates: "Sep 2026 – Present",
+    mediaAlt: "",
+    sections: [
+      {
+        heading: "How it spreads",
+        // Facts: affiliate codes through whoever runs each school's Senior
+        // Assassin account (buyer gets a small discount, host gets a cut);
+        // senior creators; proving hits is already part of the game.
+        text: "[WRITE: how it spreads]",
+      },
+      {
+        heading: "What I'm building now",
+        // Facts: none given — the current stage of the mount and the app.
+        text: "[WRITE: what I'm building now]",
+      },
+      {
+        heading: "What's hard",
+        // Facts: first physical product; mount has to grip the barrel tightly;
+        // has to fit cheap guns; 3D-printed and hand-assembled.
+        text: "[WRITE: what's hard]",
+      },
+    ],
+    // Real figures only. The first one shows on the closed card.
+    numbers: [],
+    // Or drop files in public/projects/splashy-cam/artifacts/.
+    artifacts: [],
+    // Newest first is automatic. Add a line per entry; use "YYYY-MM-DD" dates.
+    // Delete the starter entry once you've added real ones.
+    buildLog: [{ date: "[WRITE: YYYY-MM-DD]", entry: "[WRITE: what I did]" }],
+  },
+];
+
+// ---------------------------------------------------------------------------
 // Built — shown in this order
 // ---------------------------------------------------------------------------
 
 export const built: BuiltProject[] = [
   {
-    slug: "pathbrew",
-    name: "PathBrew",
-    // Facts: AI learning path generator; turns a topic or video into
-    // slide-based learning paths, with branching tutorials.
-    // Stack: Next.js 15, Supabase, Stripe, OpenRouter.
-    // Built: branching engine (fork slides with choices that jump to other
-    // slides); in-app fork editor; generate/save/load round trip; AI
-    // refinement pipeline; save with unsaved-change tracking and one-level undo.
-    // Your notes: "NotebookLM for tutorials" — take sources or pasted text and
-    // turn them into a formatted tutorial. You feel there's nothing else like it
-    // (a strong claim; be ready to say what's different).
-    oneLiner: "NotebookLM for tutorials: take sources, paste the text, and turn it into a formatted tutorial. There's nothing else like it.",
-    status: "Live",
-    role: "Founder & Developer",
-    dates: "Feb 2026 – Present",
-    liveUrl: "https://pathbrew-demo.vercel.app",
-    repoUrl: "https://github.com/teddykr08/pathbrew-demo",
-    mediaAlt: "",
-    sections: [
-      {
-        heading: "How it was meant to spread",
-        // Your notes: word of mouth. You found people on forums asking how to
-        // do something and replied with a PathBrew link.
-        text: "The only way it could spread, really, is by word of mouth and traditional marketing, just making people aware of it. Without money, it's only word of mouth. I was finding people on forums who were asking how to do something, and responded to them with the link.",
-      },
-      {
-        heading: "What I learned",
-        // Facts: challenge — Vercel's servers get blocked by YouTube, which
-        // broke transcript fetching; needed a workaround (say what yours was).
-        // Your notes: you half-knew it already, but general-purpose tools are
-        // hard to market. No built-in social/spread loop beyond word of mouth
-        // and awareness. That's part of why you like social apps.
-        text: "I already kind of knew this, but general projects like this are hard to market. It's a project I really like, but it doesn't have the growth capabilities built in that I've seen in other things. Having a specific niche for it would be good.",
-      },
-      {
-        heading: "What I still see in it",
-        // Your notes: still a lot of potential, but it has to become part of
-        // someone's routine. Like NotebookLM, its edge is convenience
-        // (compiling info that already exists), and convenience isn't always
-        // enough. The user has to think of what to put in, which makes it hard
-        // to start using.
-        text: "I still see a lot of potential, but it's something that takes implementation into a routine. It's not the best problem solver ever; it compiles other information, so if the information already exists, the advantage is convenience. And convenience is enough for somebody to put it inside of a routine.",
-      },
-    ],
-    // Real figures only (users, paths generated, paying users, etc.).
-    // Example: { value: "120", label: "signups" }
-    numbers: [],
-    // Screenshots/links of real work. Or just drop files in
-    // public/projects/pathbrew/artifacts/.
-    // Example: { label: "Fork editor", file: "fork-editor.png", alt: "..." }
-    artifacts: [],
-  },
-  {
-    slug: "upsack",
-    name: "Upsack",
-    // Facts: app built around the hacky sack trend; a community around it.
-    oneLiner: "A local social media app for hacky sack.",
-    status: "Shut down",
-    role: "Founder & Developer",
-    dates: "May 2026",
-    mediaAlt: "",
-    sections: [
-      {
-        heading: "How it was meant to spread",
-        // Facts: recruited 5 small affiliate creators.
-        // Your notes: a focused version of Ozio (community, friends,
-        // looking-for-group), aimed at the hacky sack trend you saw. A
-        // coalition of many small creators as affiliates.
-        text: "It was meant to spread as a focused version of Ozio, with all the community and friend aspects and looking-for-group, except focused on the hacky sack trend that I witnessed.",
-      },
-      {
-        heading: "What happened",
-        // Facts: went from idea to action in about a week; worked on it about
-        // a month; died because the trend was already fading.
-        // Your notes: you put finals and finishing another project first, so
-        // you got to it late. Launched and marketed as fast as you could while
-        // the trend was dying. Had the beginnings of monetization, but it
-        // wasn't thought out; a rushed build on a dying trend left no room to
-        // learn what people wanted or to make it good.
-        text: "I told myself I would study for my finals and finish another project first, so I got to it a little late. When the trend was coming down, I launched it and marketed it as quick as I could, and got a coalition of many small creators to be affiliates. I had the beginnings of monetization, but it wasn't thought out enough. Building it was quick; making it good, seeing what people wanted and monetizing it wasn't something an app grasping at a dying trend was good for.",
-      },
-      {
-        heading: "What I learned",
-        // Facts: it was a small test of the idea behind Ozio.
-        // Your notes: marketing with creators and how effective it is for
-        // certain kinds of apps; collab posts vs. creators making their own
-        // content; the details of working with creators.
-        text: "Marketing with creators, and how effective it is for specific types of apps. The difference between collab posting with a creator and having them make their own content, and the intricacies of working with creators.",
-      },
-      {
-        heading: "What I still see in it",
-        // Your notes: the parts of it that carry over to Ozio.
-        text: "Parts of it that would be applied to Ozio.",
-      },
-    ],
-    // Real figures only. Known fact: recruited 5 small affiliate creators.
-    // Example: { value: "5", label: "affiliate creators recruited" }
-    numbers: [],
-    // e.g. creator outreach DMs, posts. Or drop files in public/projects/upsack/artifacts/.
-    artifacts: [],
-  },
-  {
     slug: "scaffold",
     name: "Scaffold",
-    // Facts: embeds AI into sites, like an AI wrapper, without paying for an
-    // API key. Forms fill a prompt's blanks, then open it in ChatGPT.
-    oneLiner: "A way to embed AI into your site, like an AI wrapper, without having to pay for an API key.",
+    // Facts: forms with prefilled prompt spaces; answers fill the prompt, which
+    // opens directly in ChatGPT; gives small sites AI features with no API cost.
+    oneLiner: "[WRITE: plain one-liner matching how it actually worked]",
     // "Finished" stays true whether or not the site is still up.
     status: "Finished",
     role: "Founder & Developer",
@@ -290,14 +269,132 @@ export const built: BuiltProject[] = [
         text: "The gap it fills, free AI embedding, is getting smaller and smaller. The execution that allows it to be free is simpler, but has less potential, less you can do with it, than a traditional AI wrapper that uses an API key.",
       },
     ],
-    // Real figures only. None recorded yet.
-    numbers: [],
+    // Carried forward — facts: Scaffold had almost no marketing, which led to
+    // leading with creators on Upsack.
+    carriedForward: "[WRITE: what carried forward]",
+    // Real figures only. The first one shows on the closed card.
+    // 150 users came via Reddit and Hacker News outreach.
+    numbers: [{ value: "150", label: "users" }],
     // e.g. the marketing plan. Or drop files in public/projects/scaffold/artifacts/.
     artifacts: [],
   },
   {
+    slug: "upsack",
+    name: "Upsack",
+    // Facts: app built around the hacky sack trend; a community around it.
+    oneLiner: "A local social media app for hacky sack.",
+    status: "Shut down",
+    role: "Founder & Developer",
+    dates: "May 2026",
+    mediaAlt: "",
+    sections: [
+      {
+        heading: "How it was meant to spread",
+        // Facts: affiliate creators (5 small creators).
+        text: "[WRITE: how it spread]",
+      },
+      {
+        heading: "What happened",
+        // Facts: went from idea to action in about a week; worked on it about
+        // a month; died because the trend was already fading.
+        // Your notes: you put finals and finishing another project first, so
+        // you got to it late. Launched and marketed as fast as you could while
+        // the trend was dying. Had the beginnings of monetization, but it
+        // wasn't thought out; a rushed build on a dying trend left no room to
+        // learn what people wanted or to make it good.
+        text: "I told myself I would study for my finals and finish another project first, so I got to it a little late. When the trend was coming down, I launched it and marketed it as quick as I could, and got 5 small creators to be affiliates. I had the beginnings of monetization, but it wasn't thought out enough. Building it was quick; making it good, seeing what people wanted and monetizing it wasn't something an app grasping at a dying trend was good for.",
+      },
+      {
+        heading: "What I learned",
+        // Facts: it was a small test of the idea behind Ozio.
+        // Your notes: marketing with creators and how effective it is for
+        // certain kinds of apps; collab posts vs. creators making their own
+        // content; the details of working with creators.
+        text: "Marketing with creators, and how effective it is for specific types of apps. The difference between collab posting with a creator and having them make their own content, and the intricacies of working with creators.",
+      },
+      {
+        heading: "What I still see in it",
+        // Your notes: the parts of it that carry over to Ozio.
+        // The Ozio comparison removed from "How it spread" could go here, in
+        // your words. It read: "It was meant to spread as a focused version of
+        // Ozio, with all the community and friend aspects and looking-for-group,
+        // except focused on the hacky sack trend that I witnessed."
+        text: "Parts of it that would be applied to Ozio.",
+      },
+    ],
+    // Carried forward — facts: creator marketing lessons feed Splashy Cam's
+    // affiliate plan through game hosts.
+    carriedForward: "[WRITE: what carried forward]",
+    // Real figures only. The first one shows on the closed card.
+    numbers: [
+      { value: "5", label: "affiliate creators" },
+      { value: "~5K", label: "views on the launch video" },
+      { value: "~15K", label: "views across the campaign" },
+      { label: "Collab with a 30K-follower creator" },
+    ],
+    // e.g. creator outreach DMs, posts. Or drop files in public/projects/upsack/artifacts/.
+    artifacts: [],
+  },
+  {
+    slug: "pathbrew",
+    name: "PathBrew",
+    // Facts: AI learning path generator; turns a topic or video into
+    // slide-based learning paths, with branching tutorials.
+    // Stack: Next.js 15, Supabase, Stripe, OpenRouter.
+    // Built: branching engine (fork slides with choices that jump to other
+    // slides); in-app fork editor; generate/save/load round trip; AI
+    // refinement pipeline; save with unsaved-change tracking and one-level undo.
+    oneLiner: "NotebookLM for tutorials: take sources, paste the text, and turn it into a formatted tutorial.",
+    status: "Launched",
+    role: "Founder & Developer",
+    dates: "Feb 2026 – Present",
+    liveUrl: "https://pathbrew.guide",
+    repoUrl: "https://github.com/teddykr08/pathbrew-demo",
+    mediaAlt: "",
+    sections: [
+      {
+        heading: "How it was meant to spread",
+        // Your notes: word of mouth. You found people on forums asking how to
+        // do something and replied with a PathBrew link.
+        text: "The only way it could spread, really, is by word of mouth and traditional marketing, just making people aware of it. Without money, it's only word of mouth. I was finding people on forums who were asking how to do something, and responded to them with the link.",
+      },
+      {
+        heading: "What happened",
+        // Facts: launched publicly Sep 2026 at pathbrew.guide; posted in several
+        // promotion-friendly places; about one path generated in the first 24
+        // hours; first outside user ran it on old servicing manuals, and it
+        // worked on text but was useless on diagram-heavy pages.
+        text: "[WRITE: what happened]",
+      },
+      {
+        heading: "What I learned",
+        // Facts: challenge — Vercel's servers get blocked by YouTube, which
+        // broke transcript fetching; needed a workaround (say what yours was).
+        // Your notes: you half-knew it already, but general-purpose tools are
+        // hard to market. No built-in social/spread loop beyond word of mouth
+        // and awareness. That's part of why you like social apps.
+        text: "I already kind of knew this, but general projects like this are hard to market. It's a project I really like, but it doesn't have the growth capabilities built in that I've seen in other things. Having a specific niche for it would be good.",
+      },
+      {
+        heading: "What I still see in it",
+        // [WRITE] slot: what the real advantage is, without talking the product down.
+        text: "I still see a lot of potential, but it's something that takes implementation into a routine. [WRITE: the real advantage] And convenience is enough for somebody to put it inside of a routine.",
+      },
+    ],
+    // Carried forward — facts: a general tool with no spread built in led to
+    // Splashy Cam being built around one niche with spread designed in.
+    carriedForward: "[WRITE: what carried forward]",
+    // Real figures only. The first one shows on the closed card.
+    numbers: [{ label: "[WRITE: paths generated / users since launch]" }],
+    // Screenshots/links of real work. Or just drop files in
+    // public/projects/pathbrew/artifacts/.
+    // Example: { label: "Fork editor", file: "fork-editor.png", alt: "..." }
+    artifacts: [],
+  },
+  {
     slug: "ugc-scripts",
-    name: "UGC scripts for startups Wagr and Anoria",
+    name: "UGC agency internship",
+    subtitle: "Scripts for Wagr and Anoria",
     // Facts: user-generated-content video scripts for two apps.
     oneLiner: "Interning for a UGC agency.",
     status: "Internship",
@@ -315,10 +412,19 @@ export const built: BuiltProject[] = [
         // doing only the marketing side. Reached out to an agency you'd seen
         // around and asked if they wanted an intern; worked with them for a
         // while until the agency wound down and its people moved on.
-        text: "Because of how important marketing is, it came to me that some experience doing just the marketing for products could be good. So I reached out to an agency I had seen around and asked if they wanted an intern, and worked with them for a little bit. Then the agency went defunct and they went elsewhere.",
+        text: "Because of how important marketing is, it came to me that some experience doing just the marketing for products could be good. So I reached out to an agency I had seen around and asked if they wanted an intern, and worked with them for a little bit. [WRITE: how it ended, clearly]",
+      },
+      {
+        heading: "What I learned",
+        // Facts: writing inside constraints (careful language around stakes for
+        // Wagr, soft claims only for Anoria); what got views and what didn't,
+        // and why.
+        text: "[WRITE: what I learned]",
       },
     ],
-    // Real figures only (e.g. views per video). None recorded yet.
+    // Leave empty until you confirm. Only views on YOUR scripts, never agency
+    // or campaign totals. Possible facts to check: first intern at the agency;
+    // 100K+ views across your scripts.
     numbers: [],
     // e.g. the scripts themselves (check you're allowed to share them).
     // Or drop files in public/projects/ugc-scripts/artifacts/.
@@ -333,6 +439,7 @@ export const built: BuiltProject[] = [
     status: "Personal tool",
     role: "Developer",
     dates: "Jun 2026",
+    meta: [{ label: "Based on", value: "fork of mouse-tooltip-translator" }],
     mediaAlt: "",
     sections: [
       {
@@ -348,7 +455,7 @@ export const built: BuiltProject[] = [
         // lines to translate and see how to pronounce them. You're immersed
         // while doing whatever else you're working on, and you pick up
         // vocabulary tied to your own interests.
-        text: "Among other things, the AI chats in another language and teaches a lesson that has to do with what you're learning about. If you're a beginner, for example, it teaches you the basics while you're having that chat. It adapts to your level but pushes you, and I can translate selected lines and see how to pronounce things. That way I'm immersed in a language while I do whatever else I'm working on, and I learn vocabulary relevant to my interests. Right now it's an extension; later it could be a chatbot that uses more UI capabilities of a custom interface, which will make it even better.",
+        text: "Among other things, the AI chats in another language and teaches a lesson that has to do with what you're learning about. If you're a beginner, for example, it teaches you the basics while you're having that chat. It adapts to your level but pushes you, and I can translate selected lines and see how to pronounce things. That way I'm immersed in a language while I do whatever else I'm working on, and I learn vocabulary relevant to my interests. Right now it's an extension; later it could be a chatbot that uses more UI capabilities of a custom interface.",
       },
     ],
     // Real figures only. None recorded yet.
@@ -360,31 +467,36 @@ export const built: BuiltProject[] = [
 ];
 
 // ---------------------------------------------------------------------------
+// Other work — compact list, no expand
+// ---------------------------------------------------------------------------
+
+export const otherWork: OtherWorkItem[] = [
+  {
+    name: "Häagen-Dazs",
+    // Facts: about five months.
+    role: "[WRITE: role]",
+    dates: "[WRITE: dates]",
+    // Facts: hired for a new store's launch, trained by corporate, chosen to
+    // train one of the owners, often ran the store alone, about five months.
+    oneLiner: "[WRITE: one line]",
+  },
+  {
+    name: "Camp counselor",
+    role: "CIT, then counselor",
+    // Facts: two summers.
+    dates: "[WRITE: dates]",
+    // Facts: two summers, CIT then paid counselor across two camps, about 14
+    // weeks total, groups of 12-20 kids ages 4-6, adapted games for campers
+    // with special needs.
+    oneLiner: "[WRITE: one line]",
+  },
+];
+
+// ---------------------------------------------------------------------------
 // Not built yet
 // ---------------------------------------------------------------------------
 
 export const notBuilt: UnbuiltIdea[] = [
-  {
-    slug: "splashy-cam",
-    name: "Splashy Cam",
-    // Facts: water-gun phone mount plus an app, for Senior Assassin and water fights.
-    // Your notes: a physical/digital product for Senior Assassin that fills a
-    // gap. Senior Assassin is trendy, nationwide, a big but seasonal market.
-    // Reviewers may not know the game, so a few words explaining it helps.
-    oneLiner: "A physical/digital product for Senior Assassin that fills a present gap. Senior Assassin is a trendy thing, nationwide, with a big but seasonal market.",
-    // You have what it needs and are building it now. Delete this line if you'd rather not show it.
-    badge: "Building now",
-    sections: [
-      {
-        heading: "How it spreads",
-        // Facts: Senior Assassin and water fights.
-        // Your notes: through the existing structure — the game runner/host
-        // at each school — who promotes it and shows why it's needed within
-        // the current game; affiliate deals with the game owners.
-        text: "It uses the existing hierarchy (the game runner or host for each school, with affiliate deals with the game owners) to make people aware of the gap it fills and the advantage it gives them in the current system. The gap it fills is already a part of the game.",
-      },
-    ],
-  },
   {
     slug: "ozio",
     name: "Ozio",
@@ -393,21 +505,19 @@ export const notBuilt: UnbuiltIdea[] = [
     sections: [
       {
         heading: "How it spreads",
-        // Facts: Upsack was a small test of this idea.
-        // Your notes: social apps have the most interesting marketing
-        // possibilities, and creative marketing is your favorite part. You
-        // already have marketing ideas, some that need no money.
-        text: "Social apps have the most interesting marketing possibilities, and creatively marketing is my favorite part of this. I already have marketing ideas for Ozio that I'm eager to get to.",
+        // Facts: starts with friend groups teens already have, coordinating
+        // hangouts instead of group chats, so it's useful with zero strangers
+        // on day one; each hangout pulls in friends who aren't on it yet;
+        // "lobby settings" per hangout (location, camera, calls); paid tier
+        // saves the chat and photos.
+        text: "[WRITE: how it spreads]",
       },
       {
         heading: "Why not yet",
-        // Facts: full concept doc exists; building started and hit blockers.
-        // Your notes: your passion project. Money would give it a real head
-        // start. The honest reason: right now you want one clear success first
-        // (it helps with programs, schools, network, reputation), and Ozio
-        // didn't feel like the surest first bet. It also felt too big and
-        // money-dependent, even though it isn't entirely.
-        text: "It's my passion project, and it's a big project with a longer growth stage. The truth is I want to get one successful project first, to learn what I can and get a confidence boost that will propel me through it. The confidence and capital from one successful(ish) project will put me in a good spot to build it, and that's what I want right now before I build it (subject to change). I think it's something people will only want more and more. It will only become more desirable because it's not AI-based.",
+        // Frame as what it needs, not a delay: money, and a long growth stage;
+        // the niche is teenagers. Avoid: confidence boost, "successful(ish)",
+        // "subject to change", predictions about AI.
+        text: "[WRITE: why not yet]",
       },
     ],
   },
@@ -430,10 +540,10 @@ export const notBuilt: UnbuiltIdea[] = [
 
 export const links: SiteLink[] = [
   { label: "GitHub", href: "https://github.com/teddykr08" },
-  // Examples: { label: "Email", href: "mailto:you@example.com" },
-  //           { label: "LinkedIn", href: "https://www.linkedin.com/in/..." },
-  { label: "", href: "" },
-  { label: "", href: "" },
+  { label: "PathBrew", href: "https://pathbrew.guide" },
+  // Replace [WRITE: email] with your address, e.g. "mailto:you@example.com".
+  { label: "Email", href: "mailto:[WRITE: email]" },
+  // More: { label: "LinkedIn", href: "https://www.linkedin.com/in/..." },
 ];
 
 // ---------------------------------------------------------------------------

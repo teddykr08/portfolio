@@ -1,9 +1,38 @@
 import type { BuiltProject } from "@/content/site";
 import { Artifacts } from "./Artifacts";
+import { BuildLog } from "./BuildLog";
 import { MediaSlot } from "./MediaSlot";
 import { Sections } from "./Sections";
 import { StatusBadge } from "./StatusBadge";
-import { Inline } from "./Text";
+import { Inline, Prose } from "./Text";
+
+function Numbers({ items, label }: { items: BuiltProject["numbers"]; label: string }) {
+  return (
+    <dl className="mt-1 flex flex-wrap gap-2" aria-label={label}>
+      {items.map((n, i) => (
+        <div
+          key={i}
+          className="flex flex-col-reverse justify-end rounded-lg border border-border px-2.5 py-1 leading-tight"
+        >
+          {n.value?.trim() ? (
+            <>
+              <dt className="text-xs text-muted">
+                <Inline text={n.label} />
+              </dt>
+              <dd className="font-display text-lg font-bold tabular-nums">
+                <Inline text={n.value} />
+              </dd>
+            </>
+          ) : (
+            <dd className="py-1 text-sm font-medium">
+              <Inline text={n.label} />
+            </dd>
+          )}
+        </div>
+      ))}
+    </dl>
+  );
+}
 
 function hostname(url: string) {
   try {
@@ -15,7 +44,8 @@ function hostname(url: string) {
 
 export function BuiltCard({ project }: { project: BuiltProject }) {
   const headingId = `${project.slug}-title`;
-  const numbers = project.numbers.filter((n) => n.value.trim());
+  const numbers = project.numbers.filter((n) => (n.value ?? "").trim() || n.label.trim());
+  const [firstNumber, ...moreNumbers] = numbers;
   return (
     <article
       id={project.slug}
@@ -32,6 +62,12 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
             </h3>
             <StatusBadge status={project.status} />
           </div>
+
+          {project.subtitle && (
+            <p className="-mt-1 text-sm font-medium text-muted">
+              <Inline text={project.subtitle} />
+            </p>
+          )}
 
           <p className="text-[1.05rem]">
             <Inline text={project.oneLiner} />
@@ -50,25 +86,17 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
                 <Inline text={project.dates} />
               </dd>
             </div>
+            {project.meta?.map((row, i) => (
+              <div key={i} className="flex gap-1.5">
+                <dt>{row.label}:</dt>
+                <dd>
+                  <Inline text={row.value} />
+                </dd>
+              </div>
+            ))}
           </dl>
 
-          {numbers.length > 0 && (
-            <dl className="mt-1 flex flex-wrap gap-2" aria-label={`${project.name} numbers`}>
-              {numbers.map((n, i) => (
-                <div
-                  key={i}
-                  className="flex flex-col-reverse rounded-lg border border-border px-2.5 py-1 leading-tight"
-                >
-                  <dt className="text-xs text-muted">
-                    <Inline text={n.label} />
-                  </dt>
-                  <dd className="font-display text-lg font-bold tabular-nums">
-                    <Inline text={n.value} />
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          )}
+          {firstNumber && <Numbers items={[firstNumber]} label={`${project.name} key number`} />}
 
           {(project.liveUrl || project.repoUrl) && (
             <div className="mt-1 flex flex-wrap gap-2 text-sm font-medium">
@@ -99,6 +127,15 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
         </div>
       </div>
 
+      {project.carriedForward?.trim() && (
+        <div className="mt-4 border-l-2 border-accent pl-3">
+          <h4 className="text-xs font-bold tracking-[0.08em] text-muted uppercase">Carried forward</h4>
+          <Prose text={project.carriedForward} className="mt-1" />
+        </div>
+      )}
+
+      {project.buildLog && <BuildLog entries={project.buildLog} id={`${project.slug}-log`} />}
+
       <details className="group mt-4 border-t border-border pt-3">
         <summary className="flex cursor-pointer items-center gap-2 rounded text-sm font-semibold text-accent select-none">
           <span
@@ -111,6 +148,11 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
           <span className="hidden group-open:inline">Show less</span>
           <span className="sr-only"> about {project.name}</span>
         </summary>
+        {moreNumbers.length > 0 && (
+          <div className="mt-4">
+            <Numbers items={moreNumbers} label={`More ${project.name} numbers`} />
+          </div>
+        )}
         <div className="mt-4">
           <Sections sections={project.sections} />
         </div>

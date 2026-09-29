@@ -29,10 +29,12 @@ What's in the file, top to bottom:
 
 | Section | What it controls |
 | --- | --- |
-| `site` | Name, tagline, intro, link-preview description, optional preview image, site URL |
+| `site` | Name, tagline, facts line under it, intro, link-preview description, optional preview image, site URL |
+| `now` | The "Now" section: what you're building at the moment (full card, plus a build log) |
 | `built` | Project cards, **in the order listed** |
-| `notBuilt` | The quieter "Not built yet" cards. `hidden: true` hides one (the third slot starts hidden) |
-| `links` | Link buttons. Entries with an empty `href` are skipped |
+| `otherWork` | The compact "Other work" list (jobs etc.): name, role, dates, one line. No expand |
+| `notBuilt` | The quieter "Not built yet" cards. `hidden: true` hides one (the spare slot starts hidden) |
+| `links` | Link buttons. Entries with an empty `href` are skipped. A `[WRITE: ...]` in an `href` shows as a placeholder, not a link |
 | `accents` | Optional decorative stickers in the header |
 
 Status badges get a color when the status is `Live`, `Shut down`, `Paid work` or `Personal tool`. Anything else gets a neutral badge. Colors are set in `app/globals.css`.
@@ -53,9 +55,20 @@ Notes:
 - The box is 16:10 and the media is cropped to fill it. Wide screenshots (about 1600×1000) work best.
 - Images are resized and compressed automatically. Videos are not: keep them short (under about 10 seconds) and small (under about 3 MB). Videos play muted and on a loop, and they're paused for visitors who've turned on "reduce motion".
 
-## Sections, Numbers, Artifacts
+## Sections, Numbers, Carried forward, Build log, Artifacts
 
-Each built project in `content/site.ts` also has:
+Each project card (in `now` or `built`) also has:
+
+- **`carriedForward`**: shown on the closed card. It's what from this project changed the next one. Leave it out and nothing shows.
+- **`subtitle`** (optional): a small line under the title.
+- **`meta`** (optional): extra rows next to role and dates, e.g. `meta: [{ label: "Based on", value: "..." }]`.
+- **`buildLog`** (optional; Splashy Cam has one): a dated log shown on the card. Entries are sorted newest first automatically, so add them anywhere in the list. The 5 newest are shown and the rest are behind "Show all".
+  ```ts
+  buildLog: [
+    { date: "2026-09-26", entry: "What I did." },
+  ],
+  ```
+  Dates must be `YYYY-MM-DD`. They're displayed as "Sep 26, 2026". An entry without a valid date is pinned to the top so you notice it. Delete the starter `[WRITE: ...]` entry once you've added real ones.
 
 - **`sections`**: the text shown when the card is opened ("Read more"), in the order listed. Each one has an optional `heading`. Leave the heading out for a free-form block. Add, remove or reorder them freely:
   ```ts
@@ -65,9 +78,12 @@ Each built project in `content/site.ts` also has:
   ],
   ```
   The "Not built yet" cards use the same format. Those cards can also have a `badge` (e.g. `"Building now"`), and `hidden: true` hides a card.
-- **`numbers`**: real figures only, shown as small boxes on the closed card. If the list is empty, nothing is shown.
+- **`numbers`**: real figures only. The **first** one shows on the closed card, and the rest show when it's opened. If the list is empty, nothing is shown. Leave out `value` for a text-only item.
   ```ts
-  numbers: [{ value: "5", label: "affiliate creators recruited" }],
+  numbers: [
+    { value: "5", label: "affiliate creators" },
+    { label: "Collab with a 30K-follower creator" },
+  ],
   ```
 - **`artifacts`**: proof of real work, like screenshots of posts, DMs, scripts and marketing plans. Shown when the card is opened.
   - Easiest: drop images (`.png .jpg .webp …`) or PDFs in `public/projects/<slug>/artifacts/`. They appear automatically, labeled with their filename.

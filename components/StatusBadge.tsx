@@ -2,6 +2,8 @@ import { Inline } from "./Text";
 
 const VARIANTS: Record<string, string> = {
   live: "live",
+  launched: "live",
+  "building now": "building",
   "shut down": "shutdown",
   "paid work": "paid",
   internship: "paid",
