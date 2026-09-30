@@ -199,7 +199,8 @@ export const timeline: TimelineEntry[] = [
     name: "Scaffold",
     target: "scaffold",
     badge: "Shipped",
-    // Facts: first project; almost no marketing; still reached 150 users.
+    // Facts: first project; launched with accounts; learned a product someone
+    // would use and a product that succeeds are very different.
     text: "[WRITE: what changed from the last one]",
   },
   {
@@ -207,7 +208,17 @@ export const timeline: TimelineEntry[] = [
     name: "PathBrew",
     target: "pathbrew",
     badge: "Build start",
-    // Facts: started building.
+    // Facts: started building; original purpose wasn't going to work out.
+    text: "[WRITE: what changed from the last one]",
+  },
+  {
+    // Fill in the month you paused.
+    date: "[WRITE: month]",
+    name: "PathBrew",
+    target: "pathbrew",
+    badge: "Paused",
+    // Facts: found a new purpose, but the APIs it needed weren't worth the
+    // cost; stepped away to study for finals.
     text: "[WRITE: what changed from the last one]",
   },
   {
@@ -230,7 +241,17 @@ export const timeline: TimelineEntry[] = [
     date: "Jul 2026",
     name: "UGC agency internship",
     target: "ugc-scripts",
-    // Facts: cold-reached an agency to do only the marketing side.
+    // Facts: went to get good at marketing; learned UGC is mostly name
+    // recognition, and that your own approach is product-level marketing
+    // (make the product itself more marketable).
+    text: "[WRITE: what changed from the last one]",
+  },
+  {
+    date: "Aug 2026",
+    name: "PathBrew",
+    target: "pathbrew",
+    badge: "Back",
+    // Facts: came back to it after Upsack.
     text: "[WRITE: what changed from the last one]",
   },
   {
@@ -238,8 +259,8 @@ export const timeline: TimelineEntry[] = [
     name: "PathBrew",
     target: "pathbrew",
     badge: "Shipped",
-    // Facts: public launch at pathbrew.guide; a real user's feedback led to
-    // repositioning toward people explaining things to others.
+    // Facts: public launch at pathbrew.guide; learned that who it's for and how
+    // you reach them matter more than the tool itself.
     text: "[WRITE: what changed from the last one]",
   },
   {
@@ -247,7 +268,8 @@ export const timeline: TimelineEntry[] = [
     name: "Splashy Cam",
     target: "splashy-cam",
     current: true,
-    // Facts: first physical product; spread designed in before building.
+    // Facts: first physical product; built around product-level marketing and
+    // spread from day one.
     text: "[WRITE: what changed from the last one]",
   },
 ];
@@ -435,9 +457,9 @@ export const built: BuiltProject[] = [
     // slides); in-app fork editor; generate/save/load round trip; AI
     // refinement pipeline; save with unsaved-change tracking and one-level undo.
     oneLiner: "NotebookLM for tutorials: take sources, paste the text, and turn it into a formatted tutorial.",
-    status: "Launched, wound down",
+    status: "Launched",
     role: "Founder & Developer",
-    // Wound down, so "Present" no longer fits. Fill in the month you stopped.
+    // Fill in the month you stopped.
     dates: "Feb 2026 – [WRITE: end month]",
     liveUrl: "https://pathbrew.guide",
     repoUrl: "https://github.com/teddykr08/pathbrew-demo",
@@ -454,7 +476,9 @@ export const built: BuiltProject[] = [
         // Facts: launched publicly Sep 2026 at pathbrew.guide; posted in several
         // promotion-friendly places; about one path generated in the first 24
         // hours; first outside user ran it on old servicing manuals, and it
-        // worked on text but was useless on diagram-heavy pages.
+        // worked on text but was useless on diagram-heavy pages. Built before
+        // you learned "test first, ship later"; being hard to explain made it
+        // hard to say who it was for.
         text: "[WRITE: what happened]",
       },
       {
@@ -479,7 +503,8 @@ export const built: BuiltProject[] = [
         heading: "What I still see in it",
         // What you took from it, including the repositioning insight: chat
         // wins for learners; the person explaining needs a shareable artifact.
-        // And why you stopped. Nothing forward-looking about PathBrew.
+        // On paper a good tool; who uses it and how you reach them was the
+        // most important part. And why you stopped. Nothing forward-looking.
         text: "[WRITE: what I still see in it]",
       },
     ],
@@ -513,7 +538,7 @@ export const built: BuiltProject[] = [
         // Your notes: marketing mattered so much that you wanted experience
         // doing only the marketing side. Reached out to an agency you'd seen
         // around and asked if they wanted an intern; worked with them for a
-        // while until the agency wound down and its people moved on.
+        // while until the agency shut down and its people moved on.
         text: "Because of how important marketing is, it came to me that some experience doing just the marketing for products could be good. So I reached out to an agency I had seen around and asked if they wanted an intern, and worked with them for a little bit. [WRITE: how it ended, clearly]",
       },
       {
