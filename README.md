@@ -30,6 +30,7 @@ What's in the file, top to bottom:
 | Section | What it controls |
 | --- | --- |
 | `site` | Name, tagline, facts line under it, intro, link-preview description, optional preview image, site URL |
+| `timeline` | The dated timeline under the intro, oldest first. `target` is the slug of the card it links to; `current: true` marks the newest |
 | `now` | The "Now" section: what you're building at the moment (full card, plus a build log) |
 | `built` | Project cards, **in the order listed** |
 | `otherWork` | The compact "Other work" list (jobs etc.): name, role, dates, one line. No expand |

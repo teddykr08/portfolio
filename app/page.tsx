@@ -1,7 +1,8 @@
-import { accents, built, links, notBuilt, now, otherWork, site } from "@/content/site";
+import { accents, built, links, notBuilt, now, otherWork, site, timeline } from "@/content/site";
 import { BuiltCard } from "@/components/BuiltCard";
 import { IdeaCard } from "@/components/IdeaCard";
 import { Stickers } from "@/components/Stickers";
+import { Timeline } from "@/components/Timeline";
 import { Inline, Prose } from "@/components/Text";
 
 export default function Home() {
@@ -55,6 +56,15 @@ export default function Home() {
           <section aria-label="Intro" className="pb-12 text-[1.075rem]">
             <Prose text={site.intro} />
           </section>
+
+          {timeline.length > 0 && (
+            <section id="timeline" aria-labelledby="timeline-heading" className="scroll-mt-6 pb-14">
+              <h2 id="timeline-heading" className="mb-5 font-display text-2xl font-bold">
+                Timeline
+              </h2>
+              <Timeline entries={timeline} />
+            </section>
+          )}
 
           {now.length > 0 && (
             <section id="now" aria-labelledby="now-heading" className="scroll-mt-6 pb-14">

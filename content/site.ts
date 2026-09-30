@@ -92,6 +92,19 @@ export type LogEntry = {
   entry: string;
 };
 
+export type TimelineEntry = {
+  /** e.g. "Sep 2025". */
+  date: string;
+  name: string;
+  /** Slug of the card this links to (its id on the page). */
+  target: string;
+  /** Optional badge, e.g. "Shipped". */
+  badge?: string;
+  /** Marks the newest entry as current. */
+  current?: boolean;
+  text: string;
+};
+
 export type OtherWorkItem = {
   name: string;
   role: string;
@@ -177,6 +190,69 @@ export const site = {
 
 
 // ---------------------------------------------------------------------------
+// Timeline — oldest first. Shown under the intro. Mark the newest as current.
+// ---------------------------------------------------------------------------
+
+export const timeline: TimelineEntry[] = [
+  {
+    date: "Sep 2025",
+    name: "Scaffold",
+    target: "scaffold",
+    badge: "Shipped",
+    // Facts: first project; almost no marketing; still reached 150 users.
+    text: "[WRITE: what changed from the last one]",
+  },
+  {
+    date: "Feb 2026",
+    name: "PathBrew",
+    target: "pathbrew",
+    badge: "Build start",
+    // Facts: started building.
+    text: "[WRITE: what changed from the last one]",
+  },
+  {
+    date: "May 2026",
+    name: "Upsack",
+    target: "upsack",
+    badge: "Shipped",
+    // Facts: led with creators from day one; idea to launch fast.
+    text: "[WRITE: what changed from the last one]",
+  },
+  {
+    date: "Jun 2026",
+    name: "Chum",
+    target: "chum",
+    badge: "Personal tool",
+    // Facts: built for your own language learning.
+    text: "[WRITE: what changed from the last one]",
+  },
+  {
+    date: "Jul 2026",
+    name: "UGC agency internship",
+    target: "ugc-scripts",
+    // Facts: cold-reached an agency to do only the marketing side.
+    text: "[WRITE: what changed from the last one]",
+  },
+  {
+    date: "Sep 2026",
+    name: "PathBrew",
+    target: "pathbrew",
+    badge: "Shipped",
+    // Facts: public launch at pathbrew.guide; a real user's feedback led to
+    // repositioning toward people explaining things to others.
+    text: "[WRITE: what changed from the last one]",
+  },
+  {
+    date: "Sep 2026",
+    name: "Splashy Cam",
+    target: "splashy-cam",
+    current: true,
+    // Facts: first physical product; spread designed in before building.
+    text: "[WRITE: what changed from the last one]",
+  },
+];
+
+// ---------------------------------------------------------------------------
 // Now — what you're building at the moment (full card + build log)
 // ---------------------------------------------------------------------------
 
@@ -229,6 +305,70 @@ export const now: BuiltProject[] = [
 
 export const built: BuiltProject[] = [
   {
+    slug: "upsack",
+    name: "Upsack",
+    // Facts: app built around the hacky sack trend; a community around it.
+    oneLiner: "A local social media app for hacky sack.",
+    status: "Shut down",
+    role: "Founder & Developer",
+    dates: "May 2026",
+    mediaAlt: "",
+    sections: [
+      {
+        heading: "How it was meant to spread",
+        // Facts: affiliate creators (5 small creators).
+        text: "[WRITE: how it spread]",
+      },
+      {
+        heading: "What happened",
+        // Facts: went from idea to action in about a week; worked on it about
+        // a month; died because the trend was already fading.
+        // Your notes: you put finals and finishing another project first, so
+        // you got to it late. Launched and marketed as fast as you could while
+        // the trend was dying. Had the beginnings of monetization, but it
+        // wasn't thought out; a rushed build on a dying trend left no room to
+        // learn what people wanted or to make it good.
+        text: "I told myself I would study for my finals and finish another project first, so I got to it a little late. When the trend was coming down, I launched it and marketed it as quick as I could, and got 5 small creators to be affiliates. I had the beginnings of monetization, but it wasn't thought out enough. Building it was quick; making it good, seeing what people wanted and monetizing it wasn't something an app grasping at a dying trend was good for.",
+      },
+      {
+        heading: "Why I stopped",
+        // One or two sentences, a specific piece of evidence, no blame, no apology.
+        // Facts: the hacky sack trend was already fading when it launched;
+        // monetization wasn't thought through enough to outlast the trend.
+        text: "[WRITE: why I stopped]",
+      },
+      {
+        heading: "What I learned",
+        // Facts: it was a small test of the idea behind Ozio.
+        // Your notes: marketing with creators and how effective it is for
+        // certain kinds of apps; collab posts vs. creators making their own
+        // content; the details of working with creators.
+        text: "Marketing with creators, and how effective it is for specific types of apps. The difference between collab posting with a creator and having them make their own content, and the intricacies of working with creators.",
+      },
+      {
+        heading: "What I still see in it",
+        // Your notes: the parts of it that carry over to Ozio.
+        // The Ozio comparison removed from "How it spread" could go here, in
+        // your words. It read: "It was meant to spread as a focused version of
+        // Ozio, with all the community and friend aspects and looking-for-group,
+        // except focused on the hacky sack trend that I witnessed."
+        text: "Parts of it that would be applied to Ozio.",
+      },
+    ],
+    // Carried forward — facts: creator marketing lessons feed Splashy Cam's
+    // affiliate plan through game hosts.
+    carriedForward: "[WRITE: what carried forward]",
+    // Real figures only. The first one shows on the closed card.
+    numbers: [
+      { value: "5", label: "affiliate creators" },
+      { value: "~5K", label: "views on the launch video" },
+      { value: "~15K", label: "views across the campaign" },
+      { label: "Collab with a 30K-follower creator" },
+    ],
+    // e.g. creator outreach DMs, posts. Or drop files in public/projects/upsack/artifacts/.
+    artifacts: [],
+  },
+  {
     slug: "scaffold",
     name: "Scaffold",
     // Facts: forms with prefilled prompt spaces; answers fill the prompt, which
@@ -268,6 +408,13 @@ export const built: BuiltProject[] = [
         // Facts: none given.
         text: "The gap it fills, free AI embedding, is getting smaller and smaller. The execution that allows it to be free is simpler, but has less potential, less you can do with it, than a traditional AI wrapper that uses an API key.",
       },
+      {
+        heading: "Why I stopped",
+        // One or two sentences, a specific piece of evidence, no blame, no apology.
+        // Facts: the gap it filled (free AI without an API key) was shrinking, and
+        // the free approach can do less than a normal API-based tool.
+        text: "[WRITE: why I stopped]",
+      },
     ],
     // Carried forward — facts: Scaffold had almost no marketing, which led to
     // leading with creators on Upsack.
@@ -276,63 +423,6 @@ export const built: BuiltProject[] = [
     // 150 users came via Reddit and Hacker News outreach.
     numbers: [{ value: "150", label: "users" }],
     // e.g. the marketing plan. Or drop files in public/projects/scaffold/artifacts/.
-    artifacts: [],
-  },
-  {
-    slug: "upsack",
-    name: "Upsack",
-    // Facts: app built around the hacky sack trend; a community around it.
-    oneLiner: "A local social media app for hacky sack.",
-    status: "Shut down",
-    role: "Founder & Developer",
-    dates: "May 2026",
-    mediaAlt: "",
-    sections: [
-      {
-        heading: "How it was meant to spread",
-        // Facts: affiliate creators (5 small creators).
-        text: "[WRITE: how it spread]",
-      },
-      {
-        heading: "What happened",
-        // Facts: went from idea to action in about a week; worked on it about
-        // a month; died because the trend was already fading.
-        // Your notes: you put finals and finishing another project first, so
-        // you got to it late. Launched and marketed as fast as you could while
-        // the trend was dying. Had the beginnings of monetization, but it
-        // wasn't thought out; a rushed build on a dying trend left no room to
-        // learn what people wanted or to make it good.
-        text: "I told myself I would study for my finals and finish another project first, so I got to it a little late. When the trend was coming down, I launched it and marketed it as quick as I could, and got 5 small creators to be affiliates. I had the beginnings of monetization, but it wasn't thought out enough. Building it was quick; making it good, seeing what people wanted and monetizing it wasn't something an app grasping at a dying trend was good for.",
-      },
-      {
-        heading: "What I learned",
-        // Facts: it was a small test of the idea behind Ozio.
-        // Your notes: marketing with creators and how effective it is for
-        // certain kinds of apps; collab posts vs. creators making their own
-        // content; the details of working with creators.
-        text: "Marketing with creators, and how effective it is for specific types of apps. The difference between collab posting with a creator and having them make their own content, and the intricacies of working with creators.",
-      },
-      {
-        heading: "What I still see in it",
-        // Your notes: the parts of it that carry over to Ozio.
-        // The Ozio comparison removed from "How it spread" could go here, in
-        // your words. It read: "It was meant to spread as a focused version of
-        // Ozio, with all the community and friend aspects and looking-for-group,
-        // except focused on the hacky sack trend that I witnessed."
-        text: "Parts of it that would be applied to Ozio.",
-      },
-    ],
-    // Carried forward — facts: creator marketing lessons feed Splashy Cam's
-    // affiliate plan through game hosts.
-    carriedForward: "[WRITE: what carried forward]",
-    // Real figures only. The first one shows on the closed card.
-    numbers: [
-      { value: "5", label: "affiliate creators" },
-      { value: "~5K", label: "views on the launch video" },
-      { value: "~15K", label: "views across the campaign" },
-      { label: "Collab with a 30K-follower creator" },
-    ],
-    // e.g. creator outreach DMs, posts. Or drop files in public/projects/upsack/artifacts/.
     artifacts: [],
   },
   {
@@ -345,9 +435,10 @@ export const built: BuiltProject[] = [
     // slides); in-app fork editor; generate/save/load round trip; AI
     // refinement pipeline; save with unsaved-change tracking and one-level undo.
     oneLiner: "NotebookLM for tutorials: take sources, paste the text, and turn it into a formatted tutorial.",
-    status: "Launched",
+    status: "Launched, wound down",
     role: "Founder & Developer",
-    dates: "Feb 2026 – Present",
+    // Wound down, so "Present" no longer fits. Fill in the month you stopped.
+    dates: "Feb 2026 – [WRITE: end month]",
     liveUrl: "https://pathbrew.guide",
     repoUrl: "https://github.com/teddykr08/pathbrew-demo",
     mediaAlt: "",
@@ -367,18 +458,29 @@ export const built: BuiltProject[] = [
         text: "[WRITE: what happened]",
       },
       {
+        heading: "Why I stopped",
+        // One or two sentences, a specific piece of evidence, no blame, no apology.
+        // Facts: launched publicly with near-zero traction; learned that chat
+        // assistants win for the person learning, and the real user is the person
+        // explaining something to someone else; chose to put your time into
+        // Splashy Cam instead.
+        text: "[WRITE: why I stopped]",
+      },
+      {
         heading: "What I learned",
         // Facts: challenge — Vercel's servers get blocked by YouTube, which
         // broke transcript fetching; needed a workaround (say what yours was).
         // Your notes: you half-knew it already, but general-purpose tools are
         // hard to market. No built-in social/spread loop beyond word of mouth
         // and awareness. That's part of why you like social apps.
-        text: "I already kind of knew this, but general projects like this are hard to market. It's a project I really like, but it doesn't have the growth capabilities built in that I've seen in other things. Having a specific niche for it would be good.",
+        text: "I already kind of knew this, but general projects like this are hard to market. It's a project I really like, but it doesn't have the growth capabilities built in that I've seen in other things.",
       },
       {
         heading: "What I still see in it",
-        // [WRITE] slot: what the real advantage is, without talking the product down.
-        text: "I still see a lot of potential, but it's something that takes implementation into a routine. [WRITE: the real advantage] And convenience is enough for somebody to put it inside of a routine.",
+        // What you took from it, including the repositioning insight: chat
+        // wins for learners; the person explaining needs a shareable artifact.
+        // And why you stopped. Nothing forward-looking about PathBrew.
+        text: "[WRITE: what I still see in it]",
       },
     ],
     // Carried forward — facts: a general tool with no spread built in led to
@@ -420,6 +522,12 @@ export const built: BuiltProject[] = [
         // Wagr, soft claims only for Anoria); what got views and what didn't,
         // and why.
         text: "[WRITE: what I learned]",
+      },
+      {
+        heading: "Why I stopped",
+        // One or two sentences, a specific piece of evidence, no blame, no apology.
+        // Facts: the agency shut down.
+        text: "[WRITE: why I stopped]",
       },
     ],
     // Leave empty until you confirm. Only views on YOUR scripts, never agency
