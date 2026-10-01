@@ -201,7 +201,7 @@ export const timeline: TimelineEntry[] = [
     badge: "Shipped",
     // Facts: first project; launched with accounts; learned a product someone
     // would use and a product that succeeds are very different.
-    text: "[WRITE: what changed from the last one]",
+    text: "First project.",
   },
   {
     date: "Feb 2026",
@@ -209,32 +209,35 @@ export const timeline: TimelineEntry[] = [
     target: "pathbrew",
     badge: "Build start",
     // Facts: started building; original purpose wasn't going to work out.
-    text: "[WRITE: what changed from the last one]",
+    text: "Scaffold was for devs; PathBrew was for consumers. I saw a better use case, and it sounded like a better idea.",
   },
   {
-    date: "Apr 2026",
+    date: "Mar 2026",
     name: "PathBrew",
     target: "pathbrew",
     badge: "Paused",
     // Facts: found a new purpose, but the APIs it needed weren't worth the
-    // cost; paused to study for AP tests and finals in May.
-    text: "[WRITE: what changed from the last one]",
+    // cost; paused to study for AP tests and finals in May. It was an AI
+    // wrapper type thing you were working on quickly.
+    text: "It needed APIs, so I was further from shipping than I thought. I'd rather spend that time studying for finals and AP tests.",
   },
   {
-    date: "May 2026",
+    date: "Jun 2026",
     name: "Upsack",
     target: "upsack",
     badge: "Shipped",
     // Facts: led with creators from day one; idea to launch fast.
-    text: "[WRITE: what changed from the last one]",
+    text: "I marketed it as I was shipping it, in about a week.",
   },
   {
-    date: "Jun 2026",
+    date: "Jul 2026",
     name: "Chum",
     target: "chum",
     badge: "Personal tool",
-    // Facts: built for your own language learning.
-    text: "[WRITE: what changed from the last one]",
+    // Facts: built for your own language learning. Your notes (not on the page):
+    // in its current form it didn't seem like something that would work, and
+    // you didn't want to focus on it at that time.
+    text: "I had the idea and saw a use for it myself, so I made it. It was pretty easy to make.",
   },
   {
     date: "Jul 2026",
@@ -251,7 +254,7 @@ export const timeline: TimelineEntry[] = [
     target: "pathbrew",
     badge: "Back",
     // Facts: came back to it after Upsack.
-    text: "[WRITE: what changed from the last one]",
+    text: "I came back across PathBrew and wanted something to work on. I thought it was the best idea I could do right now.",
   },
   {
     date: "Sep 2026",
@@ -260,7 +263,7 @@ export const timeline: TimelineEntry[] = [
     badge: "Shipped",
     // Facts: public launch at pathbrew.guide; learned that who it's for and how
     // you reach them matter more than the tool itself.
-    text: "[WRITE: what changed from the last one]",
+    text: "I shipped it and realized the mistakes in building it: it wasn't marketable.",
   },
   {
     date: "Sep 2026",
@@ -269,7 +272,7 @@ export const timeline: TimelineEntry[] = [
     current: true,
     // Facts: first physical product; built around product-level marketing and
     // spread from day one.
-    text: "[WRITE: what changed from the last one]",
+    text: "I wanted to build a physical product, and one that had tech mixed in.",
   },
 ];
 
@@ -285,29 +288,18 @@ export const now: BuiltProject[] = [
     // with the camera pointing along the barrel, plus an app that records front
     // and back cameras with a tamper-proof stamp to prove hits; Senior Assassin
     // first, then a cheap POV camera option.
-    oneLiner: "[WRITE: what it is, plainly]",
+    oneLiner: "A physical/digital product for Senior Assassin that fills a present gap.",
     status: "Building now",
     role: "Founder",
     dates: "Sep 2026 – Present",
     mediaAlt: "",
     sections: [
       {
-        heading: "How it spreads",
+        // Free-form, no heading.
         // Facts: affiliate codes through whoever runs each school's Senior
-        // Assassin account (buyer gets a small discount, host gets a cut);
-        // senior creators; proving hits is already part of the game.
-        text: "[WRITE: how it spreads]",
-      },
-      {
-        heading: "What I'm building now",
-        // Facts: none given — the current stage of the mount and the app.
-        text: "[WRITE: what I'm building now]",
-      },
-      {
-        heading: "What's hard",
-        // Facts: first physical product; mount has to grip the barrel tightly;
-        // has to fit cheap guns; 3D-printed and hand-assembled.
-        text: "[WRITE: what's hard]",
+        // Assassin account; proving hits is already part of the game; mount
+        // has to grip the barrel and fit cheap guns; 3D-printed.
+        text: "I'm happy about how it will spread, because the use case is already within the system of Senior Assassin itself, and Senior Assassin is trendy. I took inspiration from Anoria: I like how it cut costs by not having the tech built in, but still made something consumer. It simplified it.",
       },
     ],
     // Real figures only. The first one shows on the closed card.
@@ -332,13 +324,13 @@ export const built: BuiltProject[] = [
     oneLiner: "A local social media app for hacky sack.",
     status: "Shut down",
     role: "Founder & Developer",
-    dates: "May 2026",
+    dates: "Jun 2026",
     mediaAlt: "",
     sections: [
       {
         heading: "How it was meant to spread",
         // Facts: affiliate creators (5 small creators).
-        text: "[WRITE: how it spread]",
+        text: "It had social stuff built in, since it was a social app for the trend: the social features and communities encouraged people to get on it. I was targeting small creators who were posting a lot and were hungry, trying to be up-and-coming within the trend. They were the best people because they were also easy to reach. Same with the trend itself: people were willing to try it.",
       },
       {
         heading: "What happened",
@@ -394,7 +386,7 @@ export const built: BuiltProject[] = [
     name: "Scaffold",
     // Facts: forms with prefilled prompt spaces; answers fill the prompt, which
     // opens directly in ChatGPT; gives small sites AI features with no API cost.
-    oneLiner: "[WRITE: plain one-liner matching how it actually worked]",
+    oneLiner: "An AI alternative to putting an API in your app, but still having AI features.",
     // "Finished" stays true whether or not the site is still up.
     status: "Finished",
     role: "Founder & Developer",
@@ -458,8 +450,7 @@ export const built: BuiltProject[] = [
     oneLiner: "NotebookLM for tutorials: take sources, paste the text, and turn it into a formatted tutorial.",
     status: "Launched",
     role: "Founder & Developer",
-    // Fill in the month you stopped.
-    dates: "Feb 2026 – [WRITE: end month]",
+    dates: "Feb 2026 – Sep 2026",
     liveUrl: "https://pathbrew.guide",
     repoUrl: "https://github.com/teddykr08/pathbrew-demo",
     mediaAlt: "",
@@ -478,7 +469,7 @@ export const built: BuiltProject[] = [
         // worked on text but was useless on diagram-heavy pages. Built before
         // you learned "test first, ship later"; being hard to explain made it
         // hard to say who it was for.
-        text: "[WRITE: what happened]",
+        text: "I reused the general strategies of Scaffold, except it worked even worse, because the product didn't have the one fit use case a dev product did.",
       },
       {
         heading: "Why I stopped",
@@ -511,7 +502,8 @@ export const built: BuiltProject[] = [
     // Splashy Cam being built around one niche with spread designed in.
     carriedForward: "[WRITE: what carried forward]",
     // Real figures only. The first one shows on the closed card.
-    numbers: [{ label: "[WRITE: paths generated / users since launch]" }],
+    // Add real figures here if you want them shown, e.g. { value: "10", label: "paths generated" }.
+    numbers: [],
     // Screenshots/links of real work. Or just drop files in
     // public/projects/pathbrew/artifacts/.
     // Example: { label: "Fork editor", file: "fork-editor.png", alt: "..." }
@@ -570,7 +562,7 @@ export const built: BuiltProject[] = [
     oneLiner: "A language learning tool that I use myself.",
     status: "Personal tool",
     role: "Developer",
-    dates: "Jun 2026",
+    dates: "Jul 2026",
     meta: [{ label: "Based on", value: "fork of mouse-tooltip-translator" }],
     mediaAlt: "",
     sections: [
