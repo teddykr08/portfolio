@@ -212,13 +212,12 @@ export const timeline: TimelineEntry[] = [
     text: "[WRITE: what changed from the last one]",
   },
   {
-    // Fill in the month you paused.
-    date: "[WRITE: month]",
+    date: "Apr 2026",
     name: "PathBrew",
     target: "pathbrew",
     badge: "Paused",
     // Facts: found a new purpose, but the APIs it needed weren't worth the
-    // cost; stepped away to study for finals.
+    // cost; paused to study for AP tests and finals in May.
     text: "[WRITE: what changed from the last one]",
   },
   {
