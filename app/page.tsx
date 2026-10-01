@@ -1,12 +1,10 @@
-import { accents, built, links, notBuilt, now, otherWork, site, timeline } from "@/content/site";
+import { accents, built, links, now, otherWork, site, timeline } from "@/content/site";
 import { BuiltCard } from "@/components/BuiltCard";
-import { IdeaCard } from "@/components/IdeaCard";
 import { Stickers } from "@/components/Stickers";
 import { Timeline } from "@/components/Timeline";
 import { Inline, Prose } from "@/components/Text";
 
 export default function Home() {
-  const ideas = notBuilt.filter((i) => !i.hidden);
   const activeLinks = links.filter((l) => l.href && l.label);
 
   return (
@@ -32,6 +30,11 @@ export default function Home() {
           )}
           <nav aria-label="Sections" className="mt-6">
             <ul className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium">
+              {timeline.length > 0 && (
+                <li>
+                  <a href="#timeline">Timeline</a>
+                </li>
+              )}
               {now.length > 0 && (
                 <li>
                   <a href="#now">Now</a>
@@ -40,9 +43,9 @@ export default function Home() {
               <li>
                 <a href="#built">Built</a>
               </li>
-              {ideas.length > 0 && (
+              {otherWork.length > 0 && (
                 <li>
-                  <a href="#not-built-yet">Not built yet</a>
+                  <a href="#other-work">Other work</a>
                 </li>
               )}
               <li>
@@ -112,19 +115,6 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-            </section>
-          )}
-
-          {ideas.length > 0 && (
-            <section id="not-built-yet" aria-labelledby="ideas-heading" className="scroll-mt-6 pb-14">
-              <h2 id="ideas-heading" className="mb-5 font-display text-2xl font-bold text-muted">
-                Not built yet
-              </h2>
-              <div className={`grid gap-4 ${ideas.length > 1 ? "sm:grid-cols-2" : ""}`}>
-                {ideas.map((idea) => (
-                  <IdeaCard key={idea.slug} idea={idea} />
-                ))}
-              </div>
             </section>
           )}
 

@@ -1,6 +1,5 @@
 import type { BuiltProject } from "@/content/site";
 import { Artifacts } from "./Artifacts";
-import { BuildLog } from "./BuildLog";
 import { MediaSlot } from "./MediaSlot";
 import { Sections } from "./Sections";
 import { StatusBadge } from "./StatusBadge";
@@ -133,8 +132,6 @@ export function BuiltCard({ project }: { project: BuiltProject }) {
           <Prose text={project.carriedForward} className="mt-1" />
         </div>
       )}
-
-      {project.buildLog && <BuildLog entries={project.buildLog} id={`${project.slug}-log`} />}
 
       <details className="group mt-4 border-t border-border pt-3">
         <summary className="flex cursor-pointer items-center gap-2 rounded text-sm font-semibold text-accent select-none">

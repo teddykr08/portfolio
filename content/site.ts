@@ -39,7 +39,7 @@ export type BuiltProject = {
   slug: string;
   name: string;
   oneLiner: string;
-  /** Shown as a badge. Known values get a color: "Live", "Launched", "Shut down", "Internship", "Personal tool", "Building now". */
+  /** Shown as a badge. Known values get a color: "Live", "Launched", "Shipped", "Shut down", "Internship", "Personal tool", "Building now". */
   status: string;
   role: string;
   /** Free text, e.g. "Feb 2026 – Present". */
@@ -63,8 +63,6 @@ export type BuiltProject = {
    * when it's opened. Empty list = nothing shown.
    */
   numbers: ProjectNumber[];
-  /** Dated log, sorted newest first automatically; 5 shown, the rest behind "Show all". */
-  buildLog?: LogEntry[];
   /**
    * Proof of real work, shown in the expanded card. Files in
    * public/projects/<slug>/artifacts/ appear automatically (filename as the
@@ -84,12 +82,6 @@ export type ProjectNumber = {
 export type MetaRow = {
   label: string;
   value: string;
-};
-
-export type LogEntry = {
-  /** "YYYY-MM-DD", e.g. "2026-09-26". Used for sorting and shown as "Sep 26, 2026". */
-  date: string;
-  entry: string;
 };
 
 export type TimelineEntry = {
@@ -121,17 +113,6 @@ export type Artifact = {
   href?: string;
   /** For images: describe what's in it (screen readers). Defaults to the label. */
   alt?: string;
-};
-
-export type UnbuiltIdea = {
-  slug: string;
-  name: string;
-  oneLiner: string;
-  /** Optional small badge next to the name, e.g. "Building now". */
-  badge?: string;
-  /** true = not shown on the site. */
-  hidden?: boolean;
-  sections: Section[];
 };
 
 export type SiteLink = {
@@ -246,7 +227,7 @@ export const timeline: TimelineEntry[] = [
     // Facts: went to get good at marketing; learned UGC is mostly name
     // recognition, and that your own approach is product-level marketing
     // (make the product itself more marketable).
-    text: "[WRITE: what changed from the last one]",
+    text: "Reached out to a UGC agency and wrote scripts they used in their campaigns.",
   },
   {
     date: "Aug 2026",
@@ -299,16 +280,13 @@ export const now: BuiltProject[] = [
         // Facts: affiliate codes through whoever runs each school's Senior
         // Assassin account; proving hits is already part of the game; mount
         // has to grip the barrel and fit cheap guns; 3D-printed.
-        text: "I'm happy about how it will spread, because the use case is already within the system of Senior Assassin itself, and Senior Assassin is trendy. I took inspiration from Anoria: I like how it cut costs by not having the tech built in, but still made something consumer. It simplified it.",
+        text: "I'm figuring out how it will spread, because the use case is already within the system of Senior Assassin itself, and Senior Assassin is trendy. I took inspiration from Anoria: I like how it cut costs by not having the tech built in, but still made something consumer. It simplified it.",
       },
     ],
     // Real figures only. The first one shows on the closed card.
     numbers: [],
     // Or drop files in public/projects/splashy-cam/artifacts/.
     artifacts: [],
-    // Newest first is automatic. Add a line per entry; use "YYYY-MM-DD" dates.
-    // Delete the starter entry once you've added real ones.
-    buildLog: [{ date: "[WRITE: YYYY-MM-DD]", entry: "[WRITE: what I did]" }],
   },
 ];
 
@@ -344,33 +322,16 @@ export const built: BuiltProject[] = [
         text: "I told myself I would study for my finals and finish another project first, so I got to it a little late. When the trend was coming down, I launched it and marketed it as quick as I could, and got 5 small creators to be affiliates. I had the beginnings of monetization, but it wasn't thought out enough. Building it was quick; making it good, seeing what people wanted and monetizing it wasn't something an app grasping at a dying trend was good for.",
       },
       {
-        heading: "Why I stopped",
-        // One or two sentences, a specific piece of evidence, no blame, no apology.
-        // Facts: the hacky sack trend was already fading when it launched;
-        // monetization wasn't thought through enough to outlast the trend.
-        text: "[WRITE: why I stopped]",
-      },
-      {
         heading: "What I learned",
-        // Facts: it was a small test of the idea behind Ozio.
         // Your notes: marketing with creators and how effective it is for
         // certain kinds of apps; collab posts vs. creators making their own
         // content; the details of working with creators.
         text: "Marketing with creators, and how effective it is for specific types of apps. The difference between collab posting with a creator and having them make their own content, and the intricacies of working with creators.",
       },
-      {
-        heading: "What I still see in it",
-        // Your notes: the parts of it that carry over to Ozio.
-        // The Ozio comparison removed from "How it spread" could go here, in
-        // your words. It read: "It was meant to spread as a focused version of
-        // Ozio, with all the community and friend aspects and looking-for-group,
-        // except focused on the hacky sack trend that I witnessed."
-        text: "Parts of it that would be applied to Ozio.",
-      },
     ],
     // Carried forward — facts: creator marketing lessons feed Splashy Cam's
     // affiliate plan through game hosts.
-    carriedForward: "[WRITE: what carried forward]",
+    carriedForward: "Understanding how essential being quick to market is for capturing a trend.",
     // Real figures only. The first one shows on the closed card.
     numbers: [
       { value: "5", label: "affiliate creators" },
@@ -405,7 +366,7 @@ export const built: BuiltProject[] = [
         // Facts: planned marketing — Reddit/forum templates, cold outreach DMs,
         // a scraping agent, Product Hunt, Indie Hackers, structured data,
         // AI-search optimization. (Say which, if any, actually happened.)
-        text: "Through B2B SaaS means, except it was for small devs, so really just through forums.",
+        text: "That wasn't even planned out. The premise was what got planned out. This was my first project.",
       },
       {
         heading: "What I learned",
@@ -421,17 +382,10 @@ export const built: BuiltProject[] = [
         // Facts: none given.
         text: "The gap it fills, free AI embedding, is getting smaller and smaller. The execution that allows it to be free is simpler, but has less potential, less you can do with it, than a traditional AI wrapper that uses an API key.",
       },
-      {
-        heading: "Why I stopped",
-        // One or two sentences, a specific piece of evidence, no blame, no apology.
-        // Facts: the gap it filled (free AI without an API key) was shrinking, and
-        // the free approach can do less than a normal API-based tool.
-        text: "[WRITE: why I stopped]",
-      },
     ],
     // Carried forward — facts: Scaffold had almost no marketing, which led to
     // leading with creators on Upsack.
-    carriedForward: "[WRITE: what carried forward]",
+    carriedForward: "Figure out the growth before you figure out the product.",
     // Real figures only. The first one shows on the closed card.
     // 150 users came via Reddit and Hacker News outreach.
     numbers: [{ value: "150", label: "users" }],
@@ -472,15 +426,6 @@ export const built: BuiltProject[] = [
         text: "I reused the general strategies of Scaffold, except it worked even worse, because the product didn't have the one fit use case a dev product did.",
       },
       {
-        heading: "Why I stopped",
-        // One or two sentences, a specific piece of evidence, no blame, no apology.
-        // Facts: launched publicly with near-zero traction; learned that chat
-        // assistants win for the person learning, and the real user is the person
-        // explaining something to someone else; chose to put your time into
-        // Splashy Cam instead.
-        text: "[WRITE: why I stopped]",
-      },
-      {
         heading: "What I learned",
         // Facts: challenge — Vercel's servers get blocked by YouTube, which
         // broke transcript fetching; needed a workaround (say what yours was).
@@ -495,12 +440,12 @@ export const built: BuiltProject[] = [
         // wins for learners; the person explaining needs a shareable artifact.
         // On paper a good tool; who uses it and how you reach them was the
         // most important part. And why you stopped. Nothing forward-looking.
-        text: "[WRITE: what I still see in it]",
+        text: "I still see it as a good tool, but it's still kind of unclear who it's for.",
       },
     ],
     // Carried forward — facts: a general tool with no spread built in led to
     // Splashy Cam being built around one niche with spread designed in.
-    carriedForward: "[WRITE: what carried forward]",
+    carriedForward: "What it means for a product to be for everybody, and why it matters that there are specific people you already know who would use it.",
     // Real figures only. The first one shows on the closed card.
     // Add real figures here if you want them shown, e.g. { value: "10", label: "paths generated" }.
     numbers: [],
@@ -514,7 +459,7 @@ export const built: BuiltProject[] = [
     name: "UGC agency internship",
     subtitle: "Scripts for Wagr and Anoria",
     // Facts: user-generated-content video scripts for two apps.
-    oneLiner: "Interning for a UGC agency.",
+    oneLiner: "Reached out to a UGC agency and wrote scripts they used in their campaigns.",
     status: "Internship",
     role: "Script writer",
     dates: "Jul 2026",
@@ -530,20 +475,14 @@ export const built: BuiltProject[] = [
         // doing only the marketing side. Reached out to an agency you'd seen
         // around and asked if they wanted an intern; worked with them for a
         // while until the agency shut down and its people moved on.
-        text: "Because of how important marketing is, it came to me that some experience doing just the marketing for products could be good. So I reached out to an agency I had seen around and asked if they wanted an intern, and worked with them for a little bit. [WRITE: how it ended, clearly]",
+        text: "Because of how important marketing is, it came to me that some experience doing just the marketing for products could be good. So I reached out to an agency I had seen around and asked if they wanted an intern, and worked with them for a little bit. It fizzled out after the first month, once they had their own work to get done and scripts they needed to write.",
       },
       {
         heading: "What I learned",
         // Facts: writing inside constraints (careful language around stakes for
         // Wagr, soft claims only for Anoria); what got views and what didn't,
         // and why.
-        text: "[WRITE: what I learned]",
-      },
-      {
-        heading: "Why I stopped",
-        // One or two sentences, a specific piece of evidence, no blame, no apology.
-        // Facts: the agency shut down.
-        text: "[WRITE: why I stopped]",
+        text: "I learned a lot more about UGC and formed opinions on how I would and wouldn't want to use it in my products: I see it as a modern version of traditional marketing where you're just building awareness, which isn't very high-converting and definitely isn't specific to each product the way I want marketing to be in my products.",
       },
     ],
     // Leave empty until you confirm. Only views on YOUR scripts, never agency
@@ -598,63 +537,21 @@ export const otherWork: OtherWorkItem[] = [
   {
     name: "Häagen-Dazs",
     // Facts: about five months.
-    role: "[WRITE: role]",
-    dates: "[WRITE: dates]",
+    role: "Team Member / Shift Leader",
+    dates: "Mar 2026 – Present",
     // Facts: hired for a new store's launch, trained by corporate, chosen to
     // train one of the owners, often ran the store alone, about five months.
-    oneLiner: "[WRITE: one line]",
+    oneLiner: "A real job, paid hourly. Taught me about working for somebody and what it means to have a job.",
   },
   {
     name: "Camp counselor",
     role: "CIT, then counselor",
     // Facts: two summers.
-    dates: "[WRITE: dates]",
+    dates: "Summers, 2023 onward",
     // Facts: two summers, CIT then paid counselor across two camps, about 14
     // weeks total, groups of 12-20 kids ages 4-6, adapted games for campers
     // with special needs.
-    oneLiner: "[WRITE: one line]",
-  },
-];
-
-// ---------------------------------------------------------------------------
-// Not built yet
-// ---------------------------------------------------------------------------
-
-export const notBuilt: UnbuiltIdea[] = [
-  {
-    slug: "ozio",
-    name: "Ozio",
-    // Facts: activity-first social app; find and join real activities near you.
-    oneLiner: "Activity-first social app: find and join real activities near you.",
-    sections: [
-      {
-        heading: "How it spreads",
-        // Facts: starts with friend groups teens already have, coordinating
-        // hangouts instead of group chats, so it's useful with zero strangers
-        // on day one; each hangout pulls in friends who aren't on it yet;
-        // "lobby settings" per hangout (location, camera, calls); paid tier
-        // saves the chat and photos.
-        text: "[WRITE: how it spreads]",
-      },
-      {
-        heading: "Why not yet",
-        // Frame as what it needs, not a delay: money, and a long growth stage;
-        // the niche is teenagers. Avoid: confidence boost, "successful(ish)",
-        // "subject to change", predictions about AI.
-        text: "[WRITE: why not yet]",
-      },
-    ],
-  },
-  {
-    // Spare slot. Set hidden: false and fill it in, or delete this whole block.
-    slug: "idea-3",
-    name: "[WRITE: name]",
-    oneLiner: "[WRITE: one line]",
-    hidden: true,
-    sections: [
-      { heading: "How it spreads", text: "[WRITE: how it spreads]" },
-      { heading: "What it needs that I don't have yet", text: "[WRITE: what it needs that I don't have yet]" },
-    ],
+    oneLiner: "A more fun job, but working with five-year-olds who are just learning about life taught me back the things I was trying to teach them.",
   },
 ];
 
@@ -665,8 +562,7 @@ export const notBuilt: UnbuiltIdea[] = [
 export const links: SiteLink[] = [
   { label: "GitHub", href: "https://github.com/teddykr08" },
   { label: "PathBrew", href: "https://pathbrew.guide" },
-  // Replace [WRITE: email] with your address, e.g. "mailto:you@example.com".
-  { label: "Email", href: "mailto:[WRITE: email]" },
+  { label: "Email", href: "mailto:teddykr08@gmail.com" },
   // More: { label: "LinkedIn", href: "https://www.linkedin.com/in/..." },
 ];
 

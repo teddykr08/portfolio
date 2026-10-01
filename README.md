@@ -31,10 +31,9 @@ What's in the file, top to bottom:
 | --- | --- |
 | `site` | Name, tagline, facts line under it, intro, link-preview description, optional preview image, site URL |
 | `timeline` | The dated timeline under the intro, oldest first. `target` is the slug of the card it links to; `current: true` marks the newest |
-| `now` | The "Now" section: what you're building at the moment (full card, plus a build log) |
+| `now` | The "Now" section: what you're building at the moment (full card) |
 | `built` | Project cards, **in the order listed** |
 | `otherWork` | The compact "Other work" list (jobs etc.): name, role, dates, one line. No expand |
-| `notBuilt` | The quieter "Not built yet" cards. `hidden: true` hides one (the spare slot starts hidden) |
 | `links` | Link buttons. Entries with an empty `href` are skipped. A `[WRITE: ...]` in an `href` shows as a placeholder, not a link |
 | `accents` | Optional decorative stickers in the header |
 
@@ -56,21 +55,13 @@ Notes:
 - The box is 16:10 and the media is cropped to fill it. Wide screenshots (about 1600×1000) work best.
 - Images are resized and compressed automatically. Videos are not: keep them short (under about 10 seconds) and small (under about 3 MB). Videos play muted and on a loop, and they're paused for visitors who've turned on "reduce motion".
 
-## Sections, Numbers, Carried forward, Build log, Artifacts
+## Sections, Numbers, Carried forward, Artifacts
 
 Each project card (in `now` or `built`) also has:
 
 - **`carriedForward`**: shown on the closed card. It's what from this project changed the next one. Leave it out and nothing shows.
 - **`subtitle`** (optional): a small line under the title.
 - **`meta`** (optional): extra rows next to role and dates, e.g. `meta: [{ label: "Based on", value: "..." }]`.
-- **`buildLog`** (optional; Splashy Cam has one): a dated log shown on the card. Entries are sorted newest first automatically, so add them anywhere in the list. The 5 newest are shown and the rest are behind "Show all".
-  ```ts
-  buildLog: [
-    { date: "2026-09-26", entry: "What I did." },
-  ],
-  ```
-  Dates must be `YYYY-MM-DD`. They're displayed as "Sep 26, 2026". An entry without a valid date is pinned to the top so you notice it. Delete the starter `[WRITE: ...]` entry once you've added real ones.
-
 - **`sections`**: the text shown when the card is opened ("Read more"), in the order listed. Each one has an optional `heading`. Leave the heading out for a free-form block. Add, remove or reorder them freely:
   ```ts
   sections: [
@@ -78,7 +69,6 @@ Each project card (in `now` or `built`) also has:
     { text: "A free-form paragraph with no heading." },
   ],
   ```
-  The "Not built yet" cards use the same format. Those cards can also have a `badge` (e.g. `"Building now"`), and `hidden: true` hides a card.
 - **`numbers`**: real figures only. The **first** one shows on the closed card, and the rest show when it's opened. If the list is empty, nothing is shown. Leave out `value` for a text-only item.
   ```ts
   numbers: [
