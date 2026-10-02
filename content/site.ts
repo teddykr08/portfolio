@@ -155,7 +155,7 @@ export const site = {
 
   // Hero line directly under your name.
   // Facts: high school senior who builds consumer products.
-  tagline: "[WRITE: one line about me]",
+  tagline: "Building products is easy now. Making people want them is what I'm working to become fluent in.",
 
   // Small facts line under the tagline.
   // Facts to pick from: grade, city, building solo since Sep 2025, or whatever
@@ -166,7 +166,7 @@ export const site = {
   // Facts to consider: high school senior; builds consumer products; this site
   // is for the Horowitz Andreessen Academy application; what ties the projects
   // below together (the ones you built and the ones you haven't yet).
-  intro: "[WRITE: short intro, a few sentences]",
+  intro: "Coming up with ideas is easy for me. Making them is getting easier by the day. It's getting easy for everybody, though, which makes more noise. So cutting through the noise is what I try to make my products do, and understanding what does that is what I'm working to do.\n\nI try to think critically in the decisions I make throughout my life and in business. The challenge of this not only fulfills me the most, but is also the most fulfilling.",
 };
 
 
