@@ -148,7 +148,7 @@ export const site = {
    * Slack, etc.). One sentence. Not shown on the page itself.
    */
   // Facts: high school senior; builds consumer products.
-  metaDescription: "[WRITE: one-sentence description for link previews]",
+  metaDescription: "Portfolio of Teddy Rosen, a high school senior building consumer products.",
 
   /** Optional link-preview image, 1200×630, placed in public/. e.g. "/og.png". */
   ogImage: "",
@@ -160,7 +160,7 @@ export const site = {
   // Small facts line under the tagline.
   // Facts to pick from: grade, city, building solo since Sep 2025, or whatever
   // facts you choose.
-  facts: "[WRITE: grade, city, building solo since Sep 2025, or whatever facts Teddy picks]",
+  facts: "High school senior · San Diego · Building since Sep 2025",
 
   // Intro: a few sentences.
   // Facts to consider: high school senior; builds consumer products; this site
