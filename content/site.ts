@@ -166,7 +166,7 @@ export const site = {
   // Facts to consider: high school senior; builds consumer products; this site
   // is for the Horowitz Andreessen Academy application; what ties the projects
   // below together (the ones you built and the ones you haven't yet).
-  intro: "Coming up with ideas is easy for me. Making them is getting easier by the day. It's getting easy for everybody, though, which makes more noise. So cutting through the noise is what I try to make my products do, and understanding what does that is what I'm working to do.\n\nI try to think critically about the decisions I make and how I spend my time throughout my life, and I apply that even more to business, which I want to make my life. The challenge of choosing the hardest part not only fulfills me the most, since it's a puzzle to solve, but is also the most fulfilling way to spend my time, one that will benefit me.",
+  intro: "Coming up with ideas is easy for me. Making them is getting easier by the day. It's getting easy for everybody, though, which makes more noise. So cutting through the noise is what I try to make my products do, and understanding what does that is what I'm working to do. The challenge of choosing the hardest part, cutting through the noise, not only fulfills me the most, since it's a puzzle to solve, but is also the most fulfilling way to spend my time, one that will benefit me.",
 };
 
 
